@@ -24,7 +24,7 @@ const UpdateProfile = () => {
     const updateProfile = async (e) => {
         e.preventDefault();
         try {
-            await axios.put(`${process.env.host}/api/v1/updateProfile`, { name, email, oldPassword, password, phone, address }, { withCredentials: true });
+            await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/updateProfile`, { name, email, oldPassword, password, phone, address }, { withCredentials: true });
             Notification('Success', 'Updated Successfully.', 'success');
             setUser({
                 name: "",

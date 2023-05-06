@@ -22,7 +22,7 @@ const AddProducts = () => {
         getCategories();
     }, [])
     const getCategories = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/categories`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`)
         setCategories(data);
     }
 
@@ -93,7 +93,7 @@ const AddProducts = () => {
         if (p1 && p2 && p3) {
             try {
                 setLoading(true)
-                await axios.post(`${process.env.host}/api/v1/addproduct`, product);
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addproduct`, product);
                 setProduct({
                     name: '',
                     category: '',

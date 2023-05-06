@@ -14,7 +14,7 @@ const ShowProducts = () => {
     const [keyword, setKeyword] = useState("");
 
     const getProducts = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/products`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/products`);
         setProducts(data);
     }
 
@@ -34,7 +34,7 @@ const ShowProducts = () => {
         try {
             setLoading(true)
             console.log(id);
-            await axios.delete(`${process.env.host}/api/v1/product/${id}`)
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
             await getProducts()
             setLoading(false);
             setTimeout(() => {
@@ -55,7 +55,7 @@ const ShowProducts = () => {
     }, [])
 
     const getCategories = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/categories`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`);
         setCategories(data);
     }
 

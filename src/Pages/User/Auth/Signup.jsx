@@ -25,7 +25,7 @@ const Signup = ({ getUser }) => {
         e.preventDefault();
         try {
             if (repassword === password) {
-                await axios.post(`${process.env.host}/api/v1/signup`, { name, email, password, phone, address }, { withCredentials: true });
+                await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/signup`, { name, email, password, phone, address }, { withCredentials: true });
                 Notification('Success', 'Signed Up Successfully.', 'success');
                 setUser({
                     name: "",

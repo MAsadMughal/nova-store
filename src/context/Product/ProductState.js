@@ -9,14 +9,14 @@ const ProductState = (props) => {
 
   const addToCart = (productId, quantity = 1) => {
     const data = { productId, quantity };
-    axios.post(`${process.env.host}/api/v1/addtocart`, data)
+    axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addtocart`, data)
       .then(response => { setCartTotal(response?.data?.total); setCart(response?.data?.cart); })
       .catch(error => { console.log(error); });
   };
 
 
   const getCart = async () => {
-    const { data } = await axios.get(`${process.env.host}/api/v1/cart`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/cart`);
     setCart(data.cart);
     setCartTotal(data.total);
   }

@@ -21,7 +21,7 @@ export default function SideBar({ getUser }) {
     const Navigate = useNavigate();
     const Navigation = (e) => { Navigate(e.target.id); setOpen(false); }
     const logout = async () => {
-        await axios.get(`${process.env.host}/api/v1/logout`, { withCredentials: true });
+        await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/logout`, { withCredentials: true });
         await getUser();
         await getUserDetails();
         Navigate('/');

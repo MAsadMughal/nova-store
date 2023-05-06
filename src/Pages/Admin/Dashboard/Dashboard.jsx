@@ -10,7 +10,7 @@ const Dashboard = () => {
   const [ratings, setRatings] = useState(0);
 
   const getStats = async () => {
-    const { data } = await axios.get(`${process.env.host}/api/v1/stats`);
+    const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/stats`);
     setStats(data);
     setReviews(data?.ratingsAndReviews[0]?.totalReviews)
     setRatings(data?.ratingsAndReviews[0]?.averageRating)

@@ -38,14 +38,14 @@ import WriteReview from './Pages/User/ProductDetails/WriteReviews';
 function App() {
 
   let [user, setUser] = useState({});
-  console.log(process.env.host);
+  console.log(process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     getUser();
   }, [])
   const getUser = async () => {
     try {
-      const { data } = await axios.get(`${process.env.host}/api/v1/me`, { withCredentials: true });
+      const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/me`, { withCredentials: true });
       setUser(data);
     } catch (error) {
     }

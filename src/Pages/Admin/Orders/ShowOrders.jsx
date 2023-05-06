@@ -9,7 +9,7 @@ function ShowOrders() {
         getOrders();
     }, [])
     const getOrders = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/getallorders`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/getallorders`);
         setOrders(data)
     }
     const changeStatus = async (id, status) => {

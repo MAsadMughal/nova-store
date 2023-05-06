@@ -11,7 +11,7 @@ const MyOrders = () => {
     }, [])
 
     const getOrders = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/getMyOrders`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/getMyOrders`);
         setOrders(data)
     }
     return (

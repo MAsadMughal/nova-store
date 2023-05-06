@@ -28,7 +28,7 @@ const Login = ({ getUser }) => {
   const login = async (e) => {
     e.preventDefault();
     try {
-      await axios.post(`${process.env.host}/api/v1/login`, { email, password }, { withCredentials: true });
+      await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/login`, { email, password }, { withCredentials: true });
       // Notification('Success', 'Logged In Successfully.', 'success');
       setUser({
         email: "",

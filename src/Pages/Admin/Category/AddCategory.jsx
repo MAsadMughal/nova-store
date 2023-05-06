@@ -25,7 +25,7 @@ const AddCategory = () => {
             // if (name && description) {
             console.log('mem')
 
-            await axios.post(`${process.env.host}/api/v1/addcategory`, category, { withCredentials: true });
+            await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addcategory`, category, { withCredentials: true });
             Notification('Success', 'Category Created Successfully', 'success')
             setCategory({
                 name: "",

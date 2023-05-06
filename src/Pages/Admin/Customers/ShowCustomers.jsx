@@ -13,13 +13,13 @@ function ShowCustomers() {
     }, [])
     const { user } = useContext(UserContext);
     const getCustomers = async () => {
-        const { data } = await axios.get(`${process.env.host}/api/v1/allusers`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/allusers`);
         setCustomers(data)
     }
     const deleteUser = async (id) => {
         try {
             console.log(id);
-            await axios.delete(`${process.env.host}/api/v1/user/${id}`)
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/user/${id}`)
             await getCustomers()
             Notification('Success', 'Customer Deleted Successfully', 'success')
         } catch (error) {

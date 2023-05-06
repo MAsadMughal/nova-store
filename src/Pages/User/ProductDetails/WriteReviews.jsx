@@ -27,7 +27,7 @@ const WriteReview = () => {
         e.preventDefault()
         try {
             if (comment && rating) {
-                await axios.put(`${process.env.host}/api/v1/reviewProduct`, { rating, comment, productId: id });
+                await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/reviewProduct`, { rating, comment, productId: id });
                 Notification('Success', 'Reviewed Successfully', 'success')
                 setReview({
                     rating: 0,

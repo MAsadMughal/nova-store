@@ -20,7 +20,7 @@ const User = (props) => {
 
     const getUserDetails = async () => {
         try {
-            const { data } = await axios.get(`${process.env.host}/api/v1/me`, { withCredentials: true });
+            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/me`, { withCredentials: true });
             setUser(data);
         } catch (e) {
             // setError('');
