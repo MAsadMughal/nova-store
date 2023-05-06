@@ -38,8 +38,7 @@ import WriteReview from './Pages/User/ProductDetails/WriteReviews';
 function App() {
 
   let [user, setUser] = useState({});
-  const host = process.env.host;
-  console.log(host);
+  console.log(process.env.host);
 
   useEffect(() => {
     getUser();
