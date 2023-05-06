@@ -1,0 +1,80 @@
+.stats {
+    --primary-clr: #1C204B;
+    --dot-clr: #BBC0FF;
+    --play: hsl(195, 74%, 62%);
+    width: 300px;
+    margin-top: 20px;
+    height: 250px;
+    border-radius: 10px;
+   }
+   
+   .stats {
+    font-family: "Arial";
+    color: #fff;
+    display: grid;
+    cursor: pointer;
+    grid-template-rows: 50px 1fr;
+   }
+   
+   .stats:hover .img-section {
+    transform: translateY(1em);
+   }
+   
+   .stats-desc {
+    border-radius: 10px;
+    padding: 15px;
+    position: relative;
+    top: -10px;
+    display: grid;
+    gap: 10px;
+    background: var(--primary-clr);
+   }
+   
+   .stats-time {
+    font-size: 2em;
+    font-weight: 500;
+    text-align: center;
+   }
+   
+   .img-section {
+    transition: 0.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
+    background: hsl(195, 74%, 62%);
+   }
+   
+   .stats-header {
+    display: flex;
+    align-items: center;
+    width: 100%;
+   }
+   
+   .stats-title {
+    flex: 1;
+    font-size: 1.5em;
+    font-weight: 500;
+   }
+   
+   .stats-menu {
+    display: flex;
+    gap: 4px;
+    margin-inline: auto;
+   }
+   
+   .stats svg {
+    float: right;
+    max-width: 100%;
+    max-height: 100%;
+   }
+   
+   .stats .dot {
+    width: 5px;
+    height: 5px;
+    border-radius: 50%;
+    background: var(--dot-clr);
+   }
+   
+   .stats .recent {
+    line-height: 0;
+    font-size: 0.8em;
+   }

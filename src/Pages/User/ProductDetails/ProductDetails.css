@@ -1,0 +1,248 @@
+#ProductDetailsMain {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 15px;
+  transition: all 0.3s ease;
+}
+
+#Carousel {
+  cursor: pointer;
+  border: 1px solid black;
+  margin-top: 50px;
+  width: 35%;
+}
+.carousel {
+  text-align: center;
+}
+#ReviewStars {
+  margin: 5% 0% 5% 0%;
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  text-align: left;
+}
+#ProductFunctions {
+  margin-top: 5%;
+  width: 32%;
+}
+#ProductTitle {
+  text-align: center;
+  margin-bottom: 8%;
+}
+.qtychange {
+  border: 1px solid black;
+  background-color: deepskyblue;
+  color: white;
+  width: 30px;
+  height: 30px;
+  margin-top: 4px;
+  text-align: center;
+  cursor: pointer;
+  font-size: 15px;
+  border-radius: 50px;
+}
+#Description {
+  margin-top: 10px;
+  padding: 25px;
+}
+#DescPara {
+  width: 100%;
+  letter-spacing: 1px;
+  word-spacing: 4px;
+  font-size: 13px;
+  line-height: 18px;
+  font-family: sans-serif;
+  padding-top: 15px;
+}
+
+#CartButton {
+  padding: 10px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  color: white;
+  border: 0.4px solid black;
+  background-color: deepskyblue;
+  border-radius: 10px;
+}
+#CartButton:hover {
+  cursor: pointer;
+}
+
+#rowDirection {
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  justify-content: space-evenly;
+  padding: 20px;
+  transition: all 0.3s ease;
+}
+
+h2 {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+}
+
+#ReviewHeading {
+  text-align: center;
+}
+
+.wrapper {
+  width: 80%;
+  height: 90%;
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+    Oxygen, Ubuntu, Cantarell, "Open Sans", "Helvetica Neue", sans-serif;
+  background: #fdfeff;
+  transition: background 0.6s ease;
+  border-radius: 10px;
+  padding: 20px 20px 30px 20px;
+}
+.wrapper:hover {
+  box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+  cursor: pointer;
+}
+.wrapper .profile {
+  margin-top: 2.2em;
+  position: relative;
+}
+.wrapper .profile:after {
+  width: 100%;
+  height: 1px;
+  content: " ";
+  display: block;
+  margin-top: 1.3em;
+  background: #e9eff6;
+}
+.wrapper .profile .thumbnail {
+  display: flex;
+  margin-left: auto;
+  margin-right: auto;
+  margin-bottom: 1.5em;
+  border-radius: 50%;
+  box-shadow: 0 13px 26px rgba(0, 0, 0, 0.2), 0 3px 6px rgba(0, 0, 0, 0.2);
+  height: 150px;
+  padding: 10px;
+}
+.MultiCarousel {
+  text-align: center;
+}
+.wrapper .profile .name {
+  color: #2d354a;
+  font-size: 24px;
+  font-weight: 600;
+  text-align: center;
+}
+.wrapper .profile .description {
+  margin-top: 20px;
+  color: #080911;
+  font-size: 14px;
+  font-weight: 300;
+  text-align: center;
+  margin-bottom: 1.3em;
+}
+.reactstar {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+@media screen and (max-width: 1180px) {
+  #ReviewStars {
+    margin: 2% 0% 2% 0%;
+  }
+  #ProductFunctions {
+    margin-top: 5%;
+    width: 35%;
+  }
+  #ProductTitle {
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  .qtychange {
+    width: 30px;
+    height: 30px;
+    font-size: 20px;
+  }
+  #Description {
+    padding: 8px;
+  }
+  #DescPara {
+    letter-spacing: 0.5px;
+    word-spacing: 3px;
+    font-size: 12px;
+    line-height: 17px;
+    padding-top: 10px;
+  }
+
+  #CartButton {
+    padding: 8px;
+  }
+
+  #rowDirection {
+    padding: 12px;
+  }
+}
+
+@media screen and (max-width: 980px) {
+  #ProductDetailsMain {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  #Carousel {
+    width: 80%;
+  }
+  .carousel {
+    text-align: center;
+  }
+  #ReviewStars {
+    margin: 2% 0% 2% 0%;
+  }
+  #ProductFunctions {
+    margin-top: 5%;
+    width: 60%;
+  }
+  #ProductTitle {
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  .qtychange {
+    width: 30px;
+    font-size: 20px;
+    height: 30px;
+  }
+}
+
+@media screen and (max-width: 580px) {
+  #ReviewStars {
+    margin: 2% 0% 2% 0%;
+  }
+  #ProductFunctions {
+    margin-top: 5%;
+    width: 80%;
+  }
+  #ProductTitle {
+    text-align: center;
+    margin-bottom: 10%;
+  }
+  #C .qtychange {
+    width: 30px;
+    font-size: 20px;
+    height: 30px;
+    border-radius: 0px;
+    margin: 5px;
+  }
+  #HomeHeading {
+    font-size: 20px;
+  }
+  #rowDirection {
+    align-items: center;
+    justify-content: space-evenly;
+  }
+  #CartButton {
+    font-size: 10px;
+  }
+}

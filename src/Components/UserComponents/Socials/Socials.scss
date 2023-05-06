@@ -1,0 +1,62 @@
+.app__social {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    flex-direction: column;
+    padding: 1rem;
+    position: fixed;
+    left: 0;
+    bottom: 0;
+    z-index: 2;
+    div {
+        width: 40px;
+        height: 40px;
+        border-radius: 50%;
+        background-color: white;
+        margin: 0.25rem 0;
+        border: 1px solid lightgray;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+
+        transition: all 0.3s ease-in-out;
+
+        svg {
+            width: 15px;
+            height: 15px;
+            color: gray;
+        }
+
+        &:hover {
+            cursor: pointer;
+            svg {
+                color: #ffffff;
+            }
+        }
+
+        @media screen and (min-width: 2000px) {
+            width: 70px;
+            height: 70px;
+
+            margin: 0.5rem 0;
+
+            svg {
+                width: 30px;
+                height: 30px;
+            }
+        }
+        @media screen and (max-width: 400px) {
+            display: none;
+        }
+    }
+}
+.twitter:hover {
+    background-color: #1da1f2;
+}
+.fb:hover {
+    background-color: #4267b2;
+}
+.insta:hover {
+    background-color: #e1306c;
+}

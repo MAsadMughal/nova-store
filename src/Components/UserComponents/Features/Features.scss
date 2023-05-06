@@ -1,0 +1,59 @@
+.head-text {
+    margin-top: 10%;
+}
+.bold-text {
+    font-size: 1rem;
+    font-weight: 800;
+    color: #030303;
+    text-align: left;
+
+    @media screen and (min-width: 2000px) {
+        font-size: 2rem;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 0.9rem;
+    }
+}
+
+.head-text {
+    font-size: 2rem;
+    font-weight: 800;
+    text-align: center;
+    color: #030303;
+    text-transform: capitalize;
+
+    span {
+        color: #313bac;
+    }
+
+    @media screen and (min-width: 2000px) {
+        font-size: 4rem;
+    }
+
+    @media screen and (max-width: 450px) {
+        font-size: 1.5rem;
+    }
+}
+
+.app__profiles {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    div {
+        margin: 2rem;
+        img {
+            height: 150px;
+            cursor: pointer;
+            border-radius: 30px;
+        }
+        @media screen and (min-width: 2000px) {
+            width: 370px;
+            margin: 2rem 4rem;
+            img {
+                height: 320px;
+            }
+        }
+    }
+}
