@@ -91,7 +91,7 @@ const EditProduct = () => {
 
     const { id } = useParams()
     const getProductDetails = async () => {
-        const { data } = await axios.get(`/api/v1/product/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
         setProduct(data);
     }
     useEffect(() => {
@@ -130,7 +130,7 @@ const EditProduct = () => {
         if ((p1 && p2 && p3) || (!p1 && !p2 && !p3)) {
             try {
                 setLoading(true)
-                await axios.put(`/api/v1/product/${id}`, product);
+                await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`, product);
                 setProduct({
                     name: '',
                     category: '',

@@ -32,7 +32,7 @@ const ProductDetails = () => {
     }, [])
 
     const getProductDetails = async () => {
-        const { data } = await axios.get(`/api/v1/product/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
         setProduct(data);
     }
     const cartAddition = async () => {

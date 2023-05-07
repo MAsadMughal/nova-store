@@ -14,7 +14,7 @@ function ShowOrders() {
     }
     const changeStatus = async (id, status) => {
         try {
-            await axios.put(`/api/v1/order/${id}`, { status });
+            await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`, { status });
             await getOrders()
             Notification('Success', 'Status Changed Successfully', 'success')
         } catch (error) {
@@ -23,7 +23,7 @@ function ShowOrders() {
     }
     const deleteOrder = async (id) => {
         try {
-            await axios.delete(`/api/v1/order/${id}`);
+            await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`);
             await getOrders()
             Notification('Success', 'Deletion Successful.', 'success')
         } catch (error) {

@@ -16,7 +16,7 @@ const EditCategory = () => {
     }, [])
 
     const getCategories = async () => {
-        const { data } = await axios.get(`/api/v1/category/${id}`);
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/category/${id}`);
         setCategory(data);
     }
 
@@ -34,7 +34,7 @@ const EditCategory = () => {
         e.preventDefault()
         try {
             if (name && description) {
-                await axios.put(`/api/v1/category/${id}`, { name, description });
+                await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/category/${id}`, { name, description });
                 Notification('Success', 'Category Updated Successfully', 'success')
                 setCategory({
                     name: "",

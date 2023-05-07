@@ -14,7 +14,7 @@ const OrderDetails = () => {
         getOrder()
     }, [])
     const getOrder = async () => {
-        const { data } = await axios.get(`/api/v1/order/${id}`)
+        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`)
         setOrder(data);
     }
 
