@@ -17,7 +17,6 @@ const EditCategory = () => {
 
     const getCategories = async () => {
         const { data } = await axios.get(`/api/v1/category/${id}`);
-        console.log(data)
         setCategory(data);
     }
 

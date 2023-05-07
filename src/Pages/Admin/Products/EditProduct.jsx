@@ -82,7 +82,6 @@ const EditProduct = () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`)
         setCategories(data);
     }
-    console.log(product?.images);
 
 
 

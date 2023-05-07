@@ -11,7 +11,9 @@ const ProductState = (props) => {
     const data = { productId, quantity };
     axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addtocart`, data)
       .then(response => { setCartTotal(response?.data?.total); setCart(response?.data?.cart); })
-      .catch(error => { console.log(error); });
+      .catch(error => {
+        console.log(error);
+      });
   };
 
 

@@ -24,7 +24,6 @@ const AllCategories = () => {
 
     const getCategories = async () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`);
-        console.log(data)
         setCategories(data);
     }
 

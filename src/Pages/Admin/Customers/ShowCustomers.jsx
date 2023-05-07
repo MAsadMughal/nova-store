@@ -18,7 +18,6 @@ function ShowCustomers() {
     }
     const deleteUser = async (id) => {
         try {
-            console.log(id);
             await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/user/${id}`)
             await getCustomers()
             Notification('Success', 'Customer Deleted Successfully', 'success')

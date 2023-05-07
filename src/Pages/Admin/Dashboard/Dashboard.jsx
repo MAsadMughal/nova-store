@@ -14,7 +14,6 @@ const Dashboard = () => {
     setStats(data);
     setReviews(data?.ratingsAndReviews[0]?.totalReviews)
     setRatings(data?.ratingsAndReviews[0]?.averageRating)
-    console.log(data);
   }
 
   useEffect(() => {

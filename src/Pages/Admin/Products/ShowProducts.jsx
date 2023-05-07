@@ -33,7 +33,6 @@ const ShowProducts = () => {
     const deleteProduct = async (id) => {
         try {
             setLoading(true)
-            console.log(id);
             await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
             await getProducts()
             setLoading(false);

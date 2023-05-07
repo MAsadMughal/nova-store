@@ -38,7 +38,6 @@ const UpdateProfile = () => {
                 Navigate('/');
             }, 2000);
         } catch (error) {
-            console.log(error);
             Notification('Error', error?.response?.data?.message, 'danger');
         }
     }

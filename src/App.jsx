@@ -40,7 +40,6 @@ axios.defaults.withCredentials = true;
 function App() {
 
   let [user, setUser] = useState({});
-  console.log(process.env.REACT_APP_API_URL);
 
   useEffect(() => {
     getUser();
