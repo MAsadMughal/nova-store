@@ -35,6 +35,8 @@ import ProductState from './context/Product/ProductState';
 import OrderDetail from './Pages/Admin/Orders/OrderDetail';
 import WriteReview from './Pages/User/ProductDetails/WriteReviews';
 
+axios.defaults.withCredentials = true;
+
 function App() {
 
   let [user, setUser] = useState({});
