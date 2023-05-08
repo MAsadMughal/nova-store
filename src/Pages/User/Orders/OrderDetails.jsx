@@ -30,7 +30,7 @@ const OrderDetails = () => {
                         <div className="col">
                             <h2>Order #{order?._id}</h2>
                             <p>Date: {new Date(order?.createdAt).toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })}</p>
-                            <h5 className="card-title text-success">Status:&nbsp;&nbsp; {order?.status}</h5>
+                            <h5 className="card-title">Status:&nbsp;&nbsp; {order?.status}</h5>
                         </div>
 
                         <h2>Order Items</h2>
