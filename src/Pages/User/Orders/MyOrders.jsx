@@ -35,6 +35,7 @@ const MyOrders = () => {
                                                 <div className="card-body">
                                                     <h5 className="card-title">Order #{item._id}</h5>
                                                     <p className="card-text">Ordered At: {new Date(item.createdAt).toLocaleString('en-PK', { timeZone: 'Asia/Karachi' })}</p>
+                                                    <h5 className="card-title text-success">Status:&nbsp;&nbsp; {item.status}</h5>
                                                     <p className="card-text">Total: ${item?.total * 0.1 + item?.total + 10}</p>
                                                     <Link to={`/orderDetails/${item?._id}`}>
                                                         <button className="btn btn-primary">View Details</button>
