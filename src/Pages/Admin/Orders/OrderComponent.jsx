@@ -27,6 +27,7 @@ const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
                                 </Link>
                                 <button className="btn btn-danger" onClick={() => deleteOrder(item._id)}>Delete</button>
                             </div>
+
                             <div className="d-flex justify-content-between align-items-center mt-1">
                                 <select disabled={disabled} name='category' value={status} onChange={(e) => { setStatus(e.target.value); setChanged(true) }} className={window.innerWidth >= 400 ? 'signupInput me-2' : 'p-2 me-2'} >
                                     {
@@ -36,7 +37,7 @@ const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
                                         })
                                     }
                                 </select>
-                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => setDisable(false) : changed ? () => { changeStatus(item._id, status); setDisable(true); } : null}>{disabled ? `Status` : `Submit`}</button>
+                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => setDisable(false) : changed ? () => { changeStatus(item._id, status); setDisable(true); } : (!disabled) ? () => setDisable(true):null}>{disabled ? `Status` : `Submit`}</button>
                             </div>
                         </div>
                     </div>
