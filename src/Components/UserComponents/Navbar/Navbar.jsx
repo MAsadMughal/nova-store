@@ -75,8 +75,8 @@ function Navbar() {
 
 
           <Box sx={{ display: { xl: 'flex', lg: 'flex', md: 'flex', sm: 'flex', xs: 'none' } }}>
-            {pages.map((page) => (
-              <Link style={{ textDecoration: 'none' }} to={`/${page}`}>
+            {pages.map((page,ind) => (
+              <Link key={ind} style={{ textDecoration: 'none' }} to={`/${page}`}>
                 <Button key={page} onClick={handleCloseNavMenu} sx={{ my: 2, textDecoration: 'none', fontWeight: "600", fontFamily: "sans-serif", }}>{page}</Button></Link>
             ))}
           </Box>

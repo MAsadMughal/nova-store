@@ -3,6 +3,7 @@ import React, { useState } from "react";
 import ProductContext from "./ProductContext";
 
 const ProductState = (props) => {
+  let [loading, setLoading] = useState(false)
   const [cart, setCart] = useState({});
   const [cartTotal, setCartTotal] = useState(0);
 
@@ -18,16 +19,18 @@ const ProductState = (props) => {
 
 
   const getCart = async () => {
+    setLoading(true)
     const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/cart`);
     setCart(data.cart);
     setCartTotal(data.total);
+    setLoading(false)
   }
 
 
   return (
     <ProductContext.Provider
       value={{
-        addToCart, cart, getCart, cartTotal
+        addToCart, cart, getCart, cartTotal, loading, setLoading
       }}
     >
       {props.children}

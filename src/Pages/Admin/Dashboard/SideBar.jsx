@@ -75,9 +75,9 @@ export default function SideBar({ getUser }) {
 
                         <div style={{ backgroundColor: 'transparent', height: "100vh", width: "300px" }}>
                             <ul>
-                                {arr.map((item) => {
+                                {arr.map((item,ind) => {
                                     return (
-                                        <li id={item.path} className='AdminSideBarLink' style={location.pathname === item.path ? { backgroundColor: 'deepskyblue', color: 'white' } : null} onClick={Navigation}>
+                                        <li key={ind} id={item.path} className='AdminSideBarLink' style={location.pathname === item.path ? { backgroundColor: 'deepskyblue', color: 'white' } : null} onClick={Navigation}>
                                             {item.logo}&nbsp;{item.title}
                                         </li>)
                                 })}

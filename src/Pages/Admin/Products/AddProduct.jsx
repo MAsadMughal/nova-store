@@ -130,10 +130,10 @@ const AddProducts = () => {
                     <input className='signupInput' type="text" value={name} onChange={handleChange} name="name" placeholder="Full Name" />
                     <label>Category</label>
                     <select className='signupInput' name='category' onChange={handleChange} value={category}>
-                        <option value="" selected>Category</option>
-                        {categories?.map((i) => {
+                        <option value="">Category</option>
+                        {categories?.map((i,ind) => {
                             return (
-                                <option value={i?._id}>{i?.name}</option>)
+                                <option key={ind} value={i?._id}>{i?.name}</option>)
                         })}
                     </select>
                     <label>Price</label>

@@ -4,13 +4,13 @@ import ReactStars from "react-rating-stars-component";
 import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Link, useNavigate, useParams, } from "react-router-dom";
-import { options } from "./objects";
 import "./ProductDetails.css";
 import Reviews from './Reviews';
 import axios from 'axios'
 import ProductContext from "../../../context/Product/ProductContext";
 import { ReactNotifications } from "react-notifications-component";
 import Notification from "../../../Components/utils/Notifications/Notifications";
+import Loader from "../../../Components/utils/Loader/Loader";
 
 const ProductDetails = () => {
     const [product, setProduct] = useState({});
@@ -18,7 +18,7 @@ const ProductDetails = () => {
     const { addToCart } = useContext(ProductContext);
     const Navigate = useNavigate()
 
-
+    const [loading, setLoading] = useState(false)
 
     let [qty, setQty] = useState(1)
     const unit = product?.price;
@@ -32,11 +32,15 @@ const ProductDetails = () => {
     }, [])
 
     const getProductDetails = async () => {
+        setLoading(true)
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
         setProduct(data);
+        setLoading(false)
     }
     const cartAddition = async () => {
+        setLoading(true)
         await addToCart(id, qty);
+        setLoading(false)
         Notification('Success', 'Product Added to Cart Successfully', 'success');
         setTimeout(() => {
             Navigate('/cart')
@@ -48,68 +52,70 @@ const ProductDetails = () => {
     }
     return (
         <><ReactNotifications />
-            <div id="Reviews">
-                <div id='ProductDetailsMain'>
-                    {/* Carousel */}
-                    <div id='Carousel'>
-                        <Carousel verticalSwipe='natural' showIndicator={false} autoFocus={true} transitionTime={1500} autoPlay={true} interval={3000} infiniteLoop={true} showArrows={false}>
-                            {product && product.images?.map((item, key) => {
-                                return (
-                                    <div key={key}>
-                                        <img alt='ProductImage' src={item?.url} />
-                                    </div>
-                                )
-                            })}
-                        </Carousel>
+
+            {loading ? <Loader /> :
+                <div id="Reviews">
+                    <div id='ProductDetailsMain'>
+                        {/* Carousel */}
+                        <div id='Carousel'>
+                            <Carousel verticalSwipe='natural' showIndicator={false} autoFocus={true} transitionTime={1500} autoPlay={true} interval={3000} infiniteLoop={true} showArrows={false}>
+                                {product && product.images?.map((item, key) => {
+                                    return (
+                                        <div key={key}>
+                                            <img alt='ProductImage' src={item?.url} />
+                                        </div>
+                                    )
+                                })}
+                            </Carousel>
+                        </div>
+
+                        {/* //Description */}
+                        <div id="ProductFunctions">
+                            <h2 id='ProductTitle'>{product?.name}</h2>
+                            <hr />
+                            <div id="ReviewStars">
+                                <h2 className='HomeHeading' id='HomeHeading'>&nbsp;&nbsp; Ratings: {product?.ratings}</h2>
+                                {(product.ratings !== 0 && product?.ratings) && <ReactStars isHalf={true} edit={false} size={30} count={5} value={product?.ratings}></ReactStars>}
+                                {product.ratings === 0 && <ReactStars isHalf={true} edit={false} size={30} count={5} value={0}></ReactStars>}
+                            </div>
+                            <hr />
+                            <div id="rowDirection">
+                                <h2 className='HomeHeading' id='HomeHeading'>Rs. &nbsp;{price}</h2>
+                                <button className="qtychange" disabled={(qty === 1) ? true : false} id="minus" onClick={() => setQty(qty - 1)}>-</button>
+                                <h2 className='HomeHeading'>{qty}</h2>
+                                <button className="qtychange" disabled={(qty === 5) ? true : false} id="plus" onClick={() => setQty(qty + 1)}>+</button>
+                                <button id='CartButton' onClick={cartAddition} >Add to Cart</button>
+                            </div>
+                            <hr />
+                            <div id="rowDirection">
+                                <h2 className='HomeHeading' id='HomeHeading'>Status:</h2>
+                                <h2>{product.stock >= 1 ? `In Stock` : `Out of Stock`}</h2>
+                            </div>
+                            <hr />
+                            <div id="Description">
+                                <h2 className='HomeHeading' id='HomeHeading'>Description :</h2>
+                                <p id="DescPara">{product?.description}</p>
+                            </div>
+                            <div id="rowDirection">
+                                <Link to={`/writereview/${product?._id}`} >
+                                    <button id='CartButton'>Submit Review</button>
+                                </Link>
+                                <button id='CartButton' onClick={showReviews}>{ShowReviews ? `Hide Reviews` : `Show Reviews`}</button>
+                            </div>
+                        </div>
+
+
+
                     </div>
 
-                    {/* //Description */}
-                    <div id="ProductFunctions">
-                        <h2 id='ProductTitle'>{product?.name}</h2>
-                        <hr />
-                        <div id="ReviewStars">
-                            <h2 className='HomeHeading' id='HomeHeading'>&nbsp;&nbsp; Ratings: {product?.ratings}</h2>
-                            {(product.ratings !== 0 && product?.ratings) && <ReactStars isHalf={true} edit={false} size={30} count={5} value={product?.ratings}></ReactStars>}
-                            {product.ratings === 0 && <ReactStars isHalf={true} edit={false} size={30} count={5} value={0}></ReactStars>}
-                        </div>
-                        <hr />
-                        <div id="rowDirection">
-                            <h2 className='HomeHeading' id='HomeHeading'>Rs. &nbsp;{price}</h2>
-                            <button className="qtychange" disabled={(qty === 1) ? true : false} id="minus" onClick={() => setQty(qty - 1)}>-</button>
-                            <h2 className='HomeHeading'>{qty}</h2>
-                            <button className="qtychange" disabled={(qty === 5) ? true : false} id="plus" onClick={() => setQty(qty + 1)}>+</button>
-                            <button id='CartButton' onClick={cartAddition} >Add to Cart</button>
-                        </div>
-                        <hr />
-                        <div id="rowDirection">
-                            <h2 className='HomeHeading' id='HomeHeading'>Status:</h2>
-                            <h2>{product.stock >= 1 ? `In Stock` : `Out of Stock`}</h2>
-                        </div>
-                        <hr />
-                        <div id="Description">
-                            <h2 className='HomeHeading' id='HomeHeading'>Description :</h2>
-                            <p id="DescPara">{product?.description}</p>
-                        </div>
-                        <div id="rowDirection">
-                            <Link to={`/writereview/${product?._id}`} >
-                                <button id='CartButton'>Submit Review</button>
-                            </Link>
-                            <button id='CartButton' onClick={showReviews}>{ShowReviews ? `Hide Reviews` : `Show Reviews`}</button>
-                        </div>
-                    </div>
+                    {/* Reviews */}
+                    <motion.div initial="hidden"
+                        whileInView="visible" viewport={{ once: true }} whileHover={{ transition: { duration: 0.2, ease: "easeInOut" } }
+                        }>
+                        {ShowReviews ? <Reviews product={product} /> : null}
+                    </motion.div>
 
-
-
-                </div>
-
-                {/* Reviews */}
-                <motion.div initial="hidden"
-                    whileInView="visible" viewport={{ once: true }} whileHover={{ transition: { duration: 0.2, ease: "easeInOut" } }
-                    }>
-                    {ShowReviews ? <Reviews product={product} /> : null}
-                </motion.div>
-
-            </div>
+                </div>}
         </>
     )
 }

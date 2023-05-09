@@ -11,7 +11,7 @@ import UserContext from '../../../context/User/UserContext';
 import axios from 'axios';
 
 export default function SideBar({ getUser }) {
-    const { user, getUserDetails } = React.useContext(UserContext);
+    const { user, getUserDetails, loading, setLoading } = React.useContext(UserContext);
     const [open, setOpen] = React.useState(false);
     const handleDrawerOpen = () => { setOpen(true); };
     const handleDrawerClose = () => { setOpen(false); };

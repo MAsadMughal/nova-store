@@ -6,10 +6,11 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import { ReactNotifications } from 'react-notifications-component';
 import Notification from '../../../Components/utils/Notifications/Notifications';
+import Loader from '../../../Components/utils/Loader/Loader';
 
 const UpdateProfile = () => {
     const { user, getUserDetails } = useContext(UserContext);
-
+    let [loading, setLoading] = useState(false)
     let [profile, setUser] = useState({
         name: user?.loggedInUser?.name,
         email: user?.loggedInUser?.email,
@@ -24,8 +25,8 @@ const UpdateProfile = () => {
     const updateProfile = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true)
             await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/updateProfile`, { name, email, oldPassword, password, phone, address }, { withCredentials: true });
-            Notification('Success', 'Updated Successfully.', 'success');
             setUser({
                 name: "",
                 email: "",
@@ -34,10 +35,14 @@ const UpdateProfile = () => {
                 address: ""
             })
             await getUserDetails();
+            setLoading(false)
+            setLoading(false)
+            Notification('Success', 'Updated Successfully.', 'success');
             setTimeout(() => {
                 Navigate('/');
             }, 2000);
         } catch (error) {
+            setLoading(false)
             Notification('Error', error?.response?.data?.message, 'danger');
         }
     }
@@ -59,25 +64,26 @@ const UpdateProfile = () => {
                 <div className="shape" ></div>
             </div>
             <ReactNotifications />
-            <form id='Signupform'>
-                <center >
-                    <AccountCircleIcon fontSize='large' />
-                </center>
-                <h3>Update Profile Details</h3>
-                <label>Name</label>
-                <input className='signupInput' type="text" name="name" value={name} onChange={handleChange} placeholder="Full Name" required />
-                <label>Email</label>
-                <input className='signupInput' type="text" name="email" value={email} onChange={handleChange} placeholder="Email" required />
-                <label>Phone No.</label>
-                <input className='signupInput' type="tel" name="phone" value={phone} onChange={handleChange} placeholder="Phone Number" required />
-                <label>Address</label>
-                <input className='signupInput' type="text" name="address" value={address} onChange={handleChange} placeholder="Complete Address" required />
-                <label>Old Password</label>
-                <input className='signupInput' type="password" name="oldPassword" value={oldPassword} onChange={handleChange} placeholder="Old Password" required />
-                <label>New Password</label>
-                <input className='signupInput' type="password" name="password" value={password} onChange={handleChange} placeholder="New Password" required />
-                <button className='loginSubmit' type="submit" onClick={updateProfile}>UPDATE</button>
-            </form>
+            {loading ? <Loader /> :
+                <form id='Signupform'>
+                    <center >
+                        <AccountCircleIcon fontSize='large' />
+                    </center>
+                    <h3>Update Profile Details</h3>
+                    <label>Name</label>
+                    <input className='signupInput' type="text" name="name" value={name} onChange={handleChange} placeholder="Full Name" required />
+                    <label>Email</label>
+                    <input className='signupInput' type="text" name="email" value={email} onChange={handleChange} placeholder="Email" required />
+                    <label>Phone No.</label>
+                    <input className='signupInput' type="tel" name="phone" value={phone} onChange={handleChange} placeholder="Phone Number" required />
+                    <label>Address</label>
+                    <input className='signupInput' type="text" name="address" value={address} onChange={handleChange} placeholder="Complete Address" required />
+                    <label>Old Password</label>
+                    <input className='signupInput' type="password" name="oldPassword" value={oldPassword} onChange={handleChange} placeholder="Old Password" required />
+                    <label>New Password</label>
+                    <input className='signupInput' type="password" name="password" value={password} onChange={handleChange} placeholder="New Password" required />
+                    <button className='loginSubmit' type="submit" onClick={updateProfile}>UPDATE</button>
+                </form>}
 
 
         </div>

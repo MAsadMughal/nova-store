@@ -34,21 +34,26 @@ import NotFound from './Pages/NotFound/NotFound';
 import ProductState from './context/Product/ProductState';
 import OrderDetail from './Pages/Admin/Orders/OrderDetail';
 import WriteReview from './Pages/User/ProductDetails/WriteReviews';
+import Loader from './Components/utils/Loader/Loader';
 
 axios.defaults.withCredentials = true;
 
 function App() {
 
   let [user, setUser] = useState({});
+  let [loading, setLoading] = useState(false);
 
   useEffect(() => {
     getUser();
   }, [])
   const getUser = async () => {
     try {
+      setLoading(true)
       const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/me`, { withCredentials: true });
       setUser(data);
+      setLoading(false)
     } catch (error) {
+      setLoading(false)
     }
   }
   const nouser = user?.success ? false : true;
@@ -58,44 +63,46 @@ function App() {
 
   return (
     <div>
-      <BrowserRouter>
-        <User>
-          <ProductState>
-            <AdminSideBar getUser={getUser} />
-            <SideBar getUser={getUser} />
-            {/* <div style={{ background: 'linear-gradient(#1845ad, #23a2f6)', width: "100%", height: "20px" }}>.</div> */}
-            <Routes>
-              <Route path='/' element={admin ? <Navigate to='/admin/dashboard' /> : normaluser ? <Home /> : <Home />} />
-              <Route path='/login' element={nouser ? <Login getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
-              <Route path='/signup' element={nouser ? <Signup getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
-              <Route path='/profile' element={normaluser && <UpdateProfile />} />
-              <Route path='/categories' element={normaluser && <AllCategories />} />
-              <Route path='/products' element={normaluser && <Products />} />
-              <Route path='/product/:id' element={normaluser && <ProductDetails />} />
-              <Route path='/writeReview/:id' element={normaluser && <WriteReview />} />
-              <Route path='/cart' element={normaluser && <Cart />} />
-              <Route path='/myorders' element={normaluser && <MyOrders />} />
-              <Route path='/orderdetails/:id' element={normaluser && <OrderDetails />} />
-              <Route path='/checkout' element={normaluser && <PlaceOrder />} />
+      {loading ? <Loader />
+        :
+        <BrowserRouter>
+          <User>
+            <ProductState>
+              <AdminSideBar getUser={getUser} />
+              <SideBar getUser={getUser} />
+              {/* <div style={{ background: 'linear-gradient(#1845ad, #23a2f6)', width: "100%", height: "20px" }}>.</div> */}
+              <Routes>
+                <Route path='/' element={admin ? <Navigate to='/admin/dashboard' /> : normaluser ? <Home /> : <Home />} />
+                <Route path='/login' element={nouser ? <Login getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
+                <Route path='/signup' element={nouser ? <Signup getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
+                <Route path='/profile' element={normaluser && <UpdateProfile />} />
+                <Route path='/categories' element={normaluser && <AllCategories />} />
+                <Route path='/products' element={normaluser && <Products />} />
+                <Route path='/product/:id' element={normaluser && <ProductDetails />} />
+                <Route path='/writeReview/:id' element={normaluser && <WriteReview />} />
+                <Route path='/cart' element={normaluser && <Cart />} />
+                <Route path='/myorders' element={normaluser && <MyOrders />} />
+                <Route path='/orderdetails/:id' element={normaluser && <OrderDetails />} />
+                <Route path='/checkout' element={normaluser && <PlaceOrder />} />
 
 
-              <Route path='/admin/login' element={admin ? <Navigate to='/admin/dashboard' /> : normaluser ? <Navigate to='/' /> : <AdminLogin getUser={getUser} />} />
-              <Route path='/admin/editproduct/:id' element={admin && <EditProduct />} />
-              <Route path='/admin/dashboard' element={admin && <Dashboard />} />
-              <Route path='/admin/profile' element={admin && <AdminProfile />} />
-              <Route path='/admin/customers' element={admin && <ShowCustomers />} />
-              <Route path='/admin/addproduct' element={admin && <AddProducts />} />
-              <Route path='/admin/products' element={admin && <ShowProducts />} />
-              <Route path='/admin/categories' element={admin && <ShowCategories />} />
-              <Route path='/admin/addCategory' element={admin && <AddCategory />} />
-              <Route path='/admin/editCategory/:id' element={admin && <EditCategory />} />
-              <Route path='/admin/orders' element={admin && <ShowOrders />} />
-              <Route path='/admin/orderDetail/:id' element={admin && <OrderDetail />} />
-              <Route path='*' element={<Navigate to='/' />} />
-            </Routes>
-          </ProductState>
-        </User>
-      </BrowserRouter>
+                <Route path='/admin/login' element={admin ? <Navigate to='/admin/dashboard' /> : normaluser ? <Navigate to='/' /> : <AdminLogin getUser={getUser} />} />
+                <Route path='/admin/editproduct/:id' element={admin && <EditProduct />} />
+                <Route path='/admin/dashboard' element={admin && <Dashboard />} />
+                <Route path='/admin/profile' element={admin && <AdminProfile />} />
+                <Route path='/admin/customers' element={admin && <ShowCustomers />} />
+                <Route path='/admin/addproduct' element={admin && <AddProducts />} />
+                <Route path='/admin/products' element={admin && <ShowProducts />} />
+                <Route path='/admin/categories' element={admin && <ShowCategories />} />
+                <Route path='/admin/addCategory' element={admin && <AddCategory />} />
+                <Route path='/admin/editCategory/:id' element={admin && <EditCategory />} />
+                <Route path='/admin/orders' element={admin && <ShowOrders />} />
+                <Route path='/admin/orderDetail/:id' element={admin && <OrderDetail />} />
+                <Route path='*' element={<Navigate to='/' />} />
+              </Routes>
+            </ProductState>
+          </User>
+        </BrowserRouter>}
     </div>
   );
 }

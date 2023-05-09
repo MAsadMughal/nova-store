@@ -91,7 +91,9 @@ const EditProduct = () => {
 
     const { id } = useParams()
     const getProductDetails = async () => {
+        setLoading(true)
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
+        setLoading(false)
         setProduct(data);
     }
     useEffect(() => {
@@ -162,6 +164,7 @@ const EditProduct = () => {
                     <div className="shape"></div>
                     <div className="shape"></div>
                 </div>
+                
                 {loading ? <Loader /> :
                     <form id='Signupform'>
                         <h3>Edit Product</h3>

@@ -1,5 +1,5 @@
 import axios from 'axios'
-import React, { useEffect, useState } from 'react'
+import React, {  useState } from 'react'
 import { Link, useNavigate, useParams } from 'react-router-dom'
 import Notification from '../../../Components/utils/Notifications/Notifications'
 import { ReactNotifications } from 'react-notifications-component'

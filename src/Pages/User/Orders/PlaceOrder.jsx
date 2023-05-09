@@ -10,9 +10,8 @@ import Notification from '../../../Components/utils/Notifications/Notifications'
 import { ReactNotifications } from 'react-notifications-component';
 
 const PlaceOrder = () => {
-    const { cart, cartTotal } = useContext(ProductContext);
+    const { cart, cartTotal, loading, setLoading } = useContext(ProductContext);
     const { user } = useContext(UserContext);
-    const [loading, setLoading] = useState(false);
 
     const Navigate = useNavigate();
     useEffect(() => {
@@ -24,12 +23,15 @@ const PlaceOrder = () => {
     const place = async (e) => {
         e.preventDefault();
         try {
+            setLoading(true)
             await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/placeorder`, { total: cartTotal });
+            setLoading(false)
             Notification('Success', 'Successfully Placed Your Order', 'success');
             setTimeout(() => {
                 Navigate('/cart');
             }, 2000);
         } catch (error) {
+            setLoading(false)
             Notification('Error', error?.response?.data?.message, 'danger');
             Navigate('/cart');
         }
@@ -37,8 +39,8 @@ const PlaceOrder = () => {
 
 
     return (<>
+        <ReactNotifications />
         {loading ? <Loader /> : <div>
-            <ReactNotifications />
             <div className="header text-black">
                 <h1 className="text-center">Checkout</h1>
             </div>
@@ -71,15 +73,15 @@ const PlaceOrder = () => {
                                     })
                                     }
                                     <tr>
-                                        <td colspan="3">Shipping</td>
+                                        <td colSpan="3">Shipping</td>
                                         <td>$10.00</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">Tax</td>
+                                        <td colSpan="3">Tax</td>
                                         <td>${(parseFloat(cartTotal * 0.1)).toFixed(2)}</td>
                                     </tr>
                                     <tr>
-                                        <td colspan="3">Total</td>
+                                        <td colSpan="3">Total</td>
                                         <td>${(parseFloat((cartTotal + 10) + (cartTotal * 0.1))).toFixed(2)}</td>
                                     </tr>
                                 </tbody>
@@ -106,8 +108,8 @@ const PlaceOrder = () => {
                                 </div>
                             </div>
                             <br /><button onClick={place} type="submit" className="btn btn-primary btn-block">Place Order</button>
-
                         </form>
+                            <br />
 
                     </div>
 

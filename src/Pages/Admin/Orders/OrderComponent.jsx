@@ -1,12 +1,10 @@
 import React, { useState } from 'react'
 import { Link } from 'react-router-dom'
-import axios from 'axios';
-import Notification from '../../../Components/utils/Notifications/Notifications';
 
 const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
     const [disabled, setDisable] = useState(true)
     const [status, setStatus] = useState(item?.status)
-
+    const [changed, setChanged] = useState(false)
 
     return (
 
@@ -30,15 +28,15 @@ const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
                                 <button className="btn btn-danger" onClick={() => deleteOrder(item._id)}>Delete</button>
                             </div>
                             <div className="d-flex justify-content-between align-items-center mt-1">
-                                <select disabled={disabled} name='category' value={status} onChange={(e) => setStatus(e.target.value)} className={window.innerWidth >= 400 ? 'signupInput me-2' : 'p-2 me-2'} >
+                                <select disabled={disabled} name='category' value={status} onChange={(e) => { setStatus(e.target.value); setChanged(true) }} className={window.innerWidth >= 400 ? 'signupInput me-2' : 'p-2 me-2'} >
                                     {
-                                        ['Processing', 'Shipped', 'Delivered', 'Returned']?.map((i) => {
+                                        ['Processing', 'Shipped', 'Delivered', 'Returned']?.map((i,key) => {
                                             return (
-                                                <option value={i}>{i}</option>)
+                                                <option key={key} value={i}>{i}</option>)
                                         })
                                     }
                                 </select>
-                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => { setDisable(false) } : () => { changeStatus(item._id, status); setDisable(true) }}>{disabled ? `Status` : `Submit`}</button>
+                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => setDisable(false) : changed ? () => { changeStatus(item._id, status); setDisable(true); } : null}>{disabled ? `Status` : `Submit`}</button>
                             </div>
                         </div>
                     </div>

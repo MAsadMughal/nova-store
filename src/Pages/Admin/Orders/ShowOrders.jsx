@@ -3,41 +3,54 @@ import OrderComponent from './OrderComponent';
 import axios from 'axios';
 import { ReactNotifications } from 'react-notifications-component';
 import Notification from '../../../Components/utils/Notifications/Notifications';
+import Loader from '../../../Components/utils/Loader/Loader';
 function ShowOrders() {
     const [orders, setOrders] = useState([]);
+    const [allOrders, setAllOrders] = useState([]);
+    let [loading, setLoading] = useState(false)
+
     useEffect(() => {
         getOrders();
     }, [])
     const getOrders = async () => {
+        setLoading(true)
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/getallorders`);
+        setAllOrders(data)
         setOrders(data)
+        setLoading(false)
     }
     const changeStatus = async (id, status) => {
         try {
+            setLoading(true)
             await axios.put(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`, { status });
             await getOrders()
+            setLoading(false)
             Notification('Success', 'Status Changed Successfully', 'success')
         } catch (error) {
+            setLoading(false)
             Notification('Error', error?.response?.data?.message, 'danger');
         }
     }
     const deleteOrder = async (id) => {
         try {
+            setLoading(true)
             await axios.delete(`${process.env.REACT_APP_API_URL}/api/v1/order/${id}`);
             await getOrders()
+            setLoading(false)
             Notification('Success', 'Deletion Successful.', 'success')
         } catch (error) {
+            setLoading(false)
             Notification('Error', error?.response?.data?.message, 'danger');
         }
     }
 
-    const [keyword, setKeyword] = useState("")
-    const searchOrders = () => {
-        if (!keyword) {
-            getOrders();
+    const searchOrders = (e) => {
+        const key = e.target.value;
+        if (!key) {
+            setOrders(allOrders);
         } else {
-            const filteredorders = orders.filter((item) => {
-                return item.user.name.toLowerCase().includes(keyword.toLowerCase())
+            const filteredorders = allOrders.filter((item) => {
+                return item.user.name.toLowerCase().includes(key.toLowerCase())
             });
             setOrders(filteredorders);
         }
@@ -50,12 +63,14 @@ function ShowOrders() {
                 <h1 className="text-center ">Orders</h1>
             </div>
             <div className='d-flex p-4'>
-                <input type="text" placeholder={window.innerWidth >= 500 ? `Search Orders by Customer Name` : `Customer Name`} onChange={(e) => setKeyword(e.target.value)} className='searchPro' />
-                <button className='btn btn-primary ms-4 ' onClick={searchOrders}>Search</button>
+                <input type="text" placeholder={window.innerWidth >= 500 ? `Search Orders by Customer Name` : `Customer Name`} onChange={searchOrders} className='signupInput' />
             </div>
-            {orders?.map((order, ind) => (
-                <OrderComponent key={ind} deleteOrder={deleteOrder} changeStatus={changeStatus} item={order} />
-            ))}
+            {loading ? <Loader /> : <>
+                {orders?.map((order, ind) => (
+                    <OrderComponent key={ind} deleteOrder={deleteOrder} changeStatus={changeStatus} item={order} />
+                ))}
+            </>
+            }
         </div>
     );
 }
