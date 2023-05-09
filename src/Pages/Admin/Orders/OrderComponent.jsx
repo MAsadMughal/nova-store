@@ -30,7 +30,7 @@ const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
                             <div className="d-flex justify-content-between align-items-center mt-1">
                                 <select disabled={disabled} name='category' value={status} onChange={(e) => { setStatus(e.target.value); setChanged(true) }} className={window.innerWidth >= 400 ? 'signupInput me-2' : 'p-2 me-2'} >
                                     {
-                                        ['Processing', 'Shipped', 'Delivered', 'Returned']?.map((i,key) => {
+                                        ['Processing', 'Shipped', 'Delivered', 'Returned']?.map((i, key) => {
                                             return (
                                                 <option key={key} value={i}>{i}</option>)
                                         })
