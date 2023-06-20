@@ -8,6 +8,7 @@ import Notification from '../../../Components/utils/Notifications/Notifications'
 import Loader from '../../../Components/utils/Loader/Loader';
 import { SpeechProvider, useSpeechContext } from '@speechly/react-client';
 import MicNone from '@mui/icons-material/MicNone'
+import MicOff from '@mui/icons-material/MicOff'
 
 const Products = () => {
     const { addToCart } = useContext(ProductContext);
@@ -28,12 +29,16 @@ const Products = () => {
     const handleClick = async () => {
         try {
             if (listening) {
-                clearFilters();
-                setLoading(true);
+                // clearFilters();
+                // setLoading(true);
                 await stop();
             } else {
+                clearFilters();
                 await attachMicrophone();
                 await start();
+                setTimeout(async () => {
+                    await stop();
+                }, 10000);
             }
         } catch (error) {
             if (error.toString().includes('Microphone consent is not given')) {
@@ -49,14 +54,18 @@ const Products = () => {
     };
 
     useEffect(() => {
-        console.log(segment)
         if (segment) {
+            if (!curr.includes(segment?.words[segment?.words.length - 1]?.value)) {
+                setCurr(curr + " " + segment?.words[segment?.words.length - 1]?.value);
+                const sen = curr.split(' ');
+                setFilters(sen);
+            }
             if (segment?.isFinal) {
-                setLoading(false);
                 const sentence = new Array();
-                segment.words.forEach((i) => {
+                segment?.words?.forEach((i) => {
                     sentence.push(i.value);
                 })
+                console.log(sentence)
                 setCurr(sentence.join(' '));
                 setFilters(sentence);
                 // setTimeout(() => {
@@ -106,6 +115,7 @@ const Products = () => {
         }, 2000);
     }
 
+
     useEffect(() => {
         const filteredProducts = allProducts.filter((product) => {
             const filter1 = keyword ? product?.name?.toLowerCase().includes(keyword?.toLowerCase()) || product?.description.toLowerCase().includes(keyword?.toLowerCase()) : true;
@@ -120,6 +130,7 @@ const Products = () => {
 
 
     const setFilters = (sentence) => {
+        console.log(sentence)
         const prosFor = ['men', 'women', 'kids', 'children', 'boys', 'girls', 'ladies', 'gents'];
         sentence.forEach((word) => {
             const lowercaseWord = word.toLowerCase();
@@ -136,7 +147,7 @@ const Products = () => {
                 return;
             }
 
-            const categoryMatch = categories.find((category) => category.name === lowercaseWord);
+            const categoryMatch = categories.find((category) => (category.name === lowercaseWord) || (category.name === (lowercaseWord + 's')) || (category.name === lowercaseWord + 'es') || (category.name === (lowercaseWord.slice(0, -1) + lowercaseWord + 'ies')));
             if (categoryMatch) {
                 setCategory(categoryMatch._id);
                 return;
@@ -163,7 +174,7 @@ const Products = () => {
         <>
             <ReactNotifications />
             {curr && <h1 className="gradient-text">{curr}</h1>}
-            <div className={`mic-container ${listening && 'recording'} border-black`} onClick={handleClick}><MicNone fontSize='large' className='mic-icon' /></div>
+            <div className={`mic-container ${listening && 'recording'} border-black`} onClick={handleClick}>{listening ? <MicOff fontSize='large' className='mic-icon' /> : <MicNone fontSize='large' className='mic-icon' />}</div>
             <div className='d-flex p-4'>
                 <input type="text" placeholder='Search Your Products' onChange={(e) => setKeyword(e.target.value)} className='signupInput' />
             </div>
