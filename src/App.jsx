@@ -35,6 +35,12 @@ import ProductState from './context/Product/ProductState';
 import OrderDetail from './Pages/Admin/Orders/OrderDetail';
 import WriteReview from './Pages/User/ProductDetails/WriteReviews';
 import Loader from './Components/utils/Loader/Loader';
+import ShowBrands from './Pages/Admin/Brand/ShowBrands';
+import AddBrand from './Pages/Admin/Brand/AddBrand';
+import EditBrand from './Pages/Admin/Brand/EditBrand';
+import ShowColors from './Pages/Admin/Color/ShowColors';
+import AddColor from './Pages/Admin/Color/AddColor';
+import EditColor from './Pages/Admin/Color/EditColor';
 
 axios.defaults.withCredentials = true;
 
@@ -96,6 +102,12 @@ function App() {
                 <Route path='/admin/categories' element={admin && <ShowCategories />} />
                 <Route path='/admin/addCategory' element={admin && <AddCategory />} />
                 <Route path='/admin/editCategory/:id' element={admin && <EditCategory />} />
+                <Route path='/admin/brands' element={admin && <ShowBrands />} />
+                <Route path='/admin/addBrand' element={admin && <AddBrand />} />
+                <Route path='/admin/editBrand/:id' element={admin && <EditBrand />} />
+                <Route path='/admin/colors' element={admin && <ShowColors />} />
+                <Route path='/admin/addColor' element={admin && <AddColor />} />
+                <Route path='/admin/editColor/:id' element={admin && <EditColor />} />
                 <Route path='/admin/orders' element={admin && <ShowOrders />} />
                 <Route path='/admin/orderDetail/:id' element={admin && <OrderDetail />} />
                 <Route path='*' element={<Navigate to='/' />} />

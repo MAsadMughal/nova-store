@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react'
 import "./Login.scss"
 import axios from 'axios'
-import { useNavigate, useParams } from 'react-router-dom'
+import { Link, useNavigate, useParams } from 'react-router-dom'
 import { ReactNotifications } from 'react-notifications-component'
 import Notification from '../../../Components/utils/Notifications/Notifications'
 import Loader from '../../../Components/utils/Loader/Loader'
@@ -32,7 +32,10 @@ const EditProduct = () => {
         category: '',
         price: '',
         stock: '',
+        proFor: '',
+        colors: [],
         weight: '',
+        brand: '',
         p1: photo1, p2: photo2, p3: photo3,
         description: ''
     })
@@ -75,19 +78,46 @@ const EditProduct = () => {
 
 
     const [categories, setCategories] = useState([])
+    const [brands, setBrands] = useState([])
+    const [allColors, setColors] = useState([])
+    const [colors, setSelectedColors] = useState(product?.colors)
+    const addColor = (c) => {
+        if (!colors.some((item) => item?._id === c?._id)) {
+            setSelectedColors([...colors, c])
+
+        }
+    }
+
+    useEffect(() => {
+        setProduct({
+            ...product, colors
+        })
+    }, [colors])
+
+    const removeColor = (c) => {
+        const updatedItems = colors.filter((item) => item?._id !== c?._id);
+        setSelectedColors(updatedItems)
+    }
+
     useEffect(() => {
         getCategories();
     }, [])
     const getCategories = async () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`)
+        const b = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/brands`)
+        const c = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/colors`)
         setCategories(data);
+        setBrands(b?.data);
+        setColors(c?.data);
     }
+ 
 
 
 
 
 
-    const { name, category, price, stock, weight, description, p1, p2, p3 } = product;
+
+    const { name, category, proFor, price, stock, weight, brand, description, p1, p2, p3 } = product;
 
     const { id } = useParams()
     const getProductDetails = async () => {
@@ -95,10 +125,12 @@ const EditProduct = () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
         setLoading(false)
         setProduct(data);
+        setSelectedColors(allColors?.filter((i) => data?.colors?.includes(i?._id)));
     }
+
     useEffect(() => {
         getProductDetails();
-    }, [])
+    }, [allColors])
 
 
 
@@ -138,7 +170,10 @@ const EditProduct = () => {
                     category: '',
                     price: '',
                     stock: '',
+                    proFor: '',
+                    colors: [],
                     weight: '',
+                    brand: '',
                     p1: photo1, p2: photo2, p3: photo3,
                     description: ''
                 })
@@ -164,12 +199,20 @@ const EditProduct = () => {
                     <div className="shape"></div>
                     <div className="shape"></div>
                 </div>
-                
+
                 {loading ? <Loader /> :
                     <form id='Signupform'>
                         <h3>Edit Product</h3>
                         <label>Name</label>
                         <input className='signupInput' value={name} type="text" onChange={handleChange} name="name" placeholder="Full Name" />
+                        <label>Product For</label>
+                        <select className='signupInput' name='proFor' onChange={handleChange} value={proFor}>
+                            <option value="">Product For</option>
+                            {['Men', 'Women', 'Kids']?.map((i, ind) => {
+                                return (
+                                    <option key={ind} value={i}>{i}</option>)
+                            })}
+                        </select>
                         <label>Category</label>
                         <select className='signupInput' name='category' onChange={handleChange} value={category}>
                             <option value="">Category</option>
@@ -178,6 +221,37 @@ const EditProduct = () => {
                                     <option key={k} value={i?._id} defaultValue={i._id === category}>{i?.name}</option>)
                             })}
                         </select>
+                        <label>Brand</label>
+                        <select className='signupInput' name='brand' onChange={handleChange} value={brand}>
+                            <option value="">Brand</option>
+                            {brands?.map((i, ind) => {
+                                return (
+                                    <option key={ind} value={i?._id}>{i?.name}</option>)
+                            })}
+                        </select>
+
+
+
+                        <label>Color Varieties</label>
+                        <Link to='/admin/addColor'>Add More Colors</Link>
+                        <label>Selected Colors</label>
+                        <div className='signupInput' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', justifyContent: 'space-around', }}>
+                            {colors?.map((i, ind) => {
+                                return (
+                                    <div key={ind} onClick={() => removeColor(i)} style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', cursor: 'pointer', height: '20px', width: '20px', background: i?.name, borderRadius: '50px' }} value={i?._id}></div>)
+                            })}
+                        </div>
+                        {allColors.length !== colors.length && <label>Available Colors</label>}
+                        <div className='Selected' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
+                            {allColors?.map((i, ind) => {
+                                return (
+                                    !colors?.some((item) => item?._id === i?._id) && <div onClick={() => addColor(i)} key={ind} style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', marginLeft: '5px', cursor: 'pointer', marginTop: '10px', height: '20px', width: '50px', borderRadius: '5px', background: i?.name, }} value={i?._id}></div>)
+                            })}
+
+                        </div>
+
+
+
                         <label>Price</label>
                         <input className='signupInput' type="number" min={10} onChange={handleChange} value={price} name="price" placeholder="Price" />
                         <label>Stock</label>

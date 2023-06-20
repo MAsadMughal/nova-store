@@ -37,7 +37,7 @@ const OrderComponent = ({ item, changeStatus, deleteOrder }) => {
                                         })
                                     }
                                 </select>
-                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => setDisable(false) : changed ? () => { changeStatus(item._id, status); setDisable(true); } : (!disabled) ? () => setDisable(true):null}>{disabled ? `Status` : `Submit`}</button>
+                                <button className="btn btn-info text-light mt-2" onClick={disabled ? () => setDisable(false) : changed ? () => { changeStatus(item._id, status); setDisable(true); } : (!disabled) ? () => setDisable(true) : null}>{disabled ? `Status` : `Submit`}</button>
                             </div>
                         </div>
                     </div>
