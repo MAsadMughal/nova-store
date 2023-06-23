@@ -415,3 +415,111 @@ nav {
     height: 50px;
   }
 }
+
+@media screen and (max-width: 575.98px) {
+  .card {
+    width: 100%;
+    font-size: 0.8rem;
+  }
+}
+.card-img-top {
+  object-fit: cover;
+}
+.searchPro {
+  width: 90%;
+  padding-left: 20px;
+}
+
+.mic-container {
+  position: fixed;
+  bottom: 10px;
+  margin-left: 48%;
+  z-index: 1;
+  border: 4px solid deepskyblue;
+  padding: 5px;
+  border-radius: 50px;
+  cursor: pointer;
+}
+.mic-container:hover {
+  background: white;
+}
+
+.gradient-text {
+  width: max-content;
+  padding: 10px;
+  color: white;
+  margin-left: 23px;
+  position: fixed;
+  font-size: large;
+  bottom:81%;
+  z-index: 1;
+  background: #55dff9;
+  background: linear-gradient(135deg, #55dff9, #9480d8);
+}
+@media screen and (max-width: 1100px) {
+  .mic-container {
+    margin-left: 47%;
+  }
+}
+@media screen and (max-width: 800px) {
+  .mic-container {
+    margin-left: 46.5%;
+  }
+}
+@media screen and (max-width: 600px) {
+  .mic-container {
+    margin-left: 46%;
+    background: white;
+  }
+}
+@media screen and (max-width: 420px) {
+  .searchPro {
+    padding-left: 10px;
+    font-size: 14px;
+  }
+  .mic-container {
+    margin-left: 45%;
+  }
+  .gradient-text {
+    width: fit-content;
+    margin-left: 0px;
+  }
+}
+@media screen and (max-width: 350px) {
+  .searchPro {
+    width: 95%;
+    padding-left: 5px;
+  }
+  .mic-container {
+    margin-left: 40%;
+  }
+}
+
+.searchPro {
+  border: 1px solid black;
+  border-radius: 8px;
+}
+
+.mic-icon {
+  fill: #000;
+  transition: fill 0.3s;
+}
+
+.mic-container.recording .mic-icon {
+  fill: red;
+  animation: pulse 0.3s infinite;
+}
+.recording {
+  animation: pulse 0.3s infinite;
+}
+@keyframes pulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
+}

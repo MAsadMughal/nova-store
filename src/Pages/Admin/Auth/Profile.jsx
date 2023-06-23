@@ -19,6 +19,8 @@ const AdminProfile = () => {
         phone: user?.loggedInUser?.phone,
         address: user?.loggedInUser?.address
     })
+
+    
     const Navigate = useNavigate();
     const { name, email, oldPassword, password, phone, address } = profile;
 

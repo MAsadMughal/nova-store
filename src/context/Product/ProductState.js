@@ -8,13 +8,18 @@ const ProductState = (props) => {
   const [cartTotal, setCartTotal] = useState(0);
 
 
-  const addToCart = (productId, quantity = 1) => {
-    const data = { productId, quantity };
-    axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addtocart`, data)
-      .then(response => { setCartTotal(response?.data?.total); setCart(response?.data?.cart); })
-      .catch(error => {
-        console.log(error);
-      });
+  const addToCart = (productId, quantity = 1, color) => {
+    setLoading(true)
+    console.log(color)
+    if (quantity >= 1) {
+      const data = { productId, quantity, color };
+      axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addtocart`, data)
+        .then(response => { setCartTotal(response?.data?.total); setCart(response?.data?.cart); })
+        .catch(error => {
+          console.log(error);
+        });
+      setLoading(false)
+    }
   };
 
 

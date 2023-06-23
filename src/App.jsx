@@ -1,7 +1,7 @@
 import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/dropdown';
-import { useEffect, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, } from 'react-router-dom';
 import './App.scss';
 import AdminLogin from './Pages/Admin/Auth/Login';
@@ -41,14 +41,12 @@ import EditBrand from './Pages/Admin/Brand/EditBrand';
 import ShowColors from './Pages/Admin/Color/ShowColors';
 import AddColor from './Pages/Admin/Color/AddColor';
 import EditColor from './Pages/Admin/Color/EditColor';
-
 axios.defaults.withCredentials = true;
 
 function App() {
 
   let [user, setUser] = useState({});
   let [loading, setLoading] = useState(false);
-
   useEffect(() => {
     getUser();
   }, [])
@@ -84,7 +82,7 @@ function App() {
                 <Route path='/profile' element={normaluser && <UpdateProfile />} />
                 <Route path='/categories' element={normaluser && <AllCategories />} />
                 <Route path='/products' element={normaluser && <Products />} />
-                <Route path='/product/:id' element={normaluser && <ProductDetails />} />
+                <Route path='/product/:id' element={<ProductDetails />} />
                 <Route path='/writeReview/:id' element={normaluser && <WriteReview />} />
                 <Route path='/cart' element={normaluser && <Cart />} />
                 <Route path='/myorders' element={normaluser && <MyOrders />} />

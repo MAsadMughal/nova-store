@@ -1,6 +1,6 @@
 import AccountCircleIcon from '@mui/icons-material/AccountCircle';
 import CloseIcon from '@mui/icons-material/Close';
-import { AppBar, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
+import { AppBar, Badge, Drawer, IconButton, Toolbar, Typography } from "@mui/material";
 import Box from '@mui/material/Box';
 import { styled } from '@mui/material/styles';
 import * as React from 'react';
@@ -9,6 +9,9 @@ import "./SideBar.css";
 import { arr } from './SidebarData';
 import UserContext from '../../../context/User/UserContext';
 import axios from 'axios';
+import ProductContext from '../../../context/Product/ProductContext';
+import CartIcon from '@mui/icons-material/ShoppingCart'
+
 
 export default function SideBar({ getUser }) {
     const { user, getUserDetails, loading, setLoading } = React.useContext(UserContext);
@@ -19,6 +22,10 @@ export default function SideBar({ getUser }) {
     const location = useLocation();
     const Navigate = useNavigate();
     const Navigation = (e) => { Navigate(e.target.id); setOpen(false); }
+    const { cart, getCart } = React.useContext(ProductContext);
+    React.useEffect(() => {
+        getCart()
+    }, [])
 
     const logout = async () => {
         await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/logout`, { withCredentials: true });
@@ -36,11 +43,13 @@ export default function SideBar({ getUser }) {
         <>{!(location.pathname.includes('admin')) ?
             <Box sx={{ display: 'flex' }}>
                 <Navbar position="fixed" open={open}>
-                    <Toolbar >
+                    <Toolbar>
                         {(user?.success && user?.loggedInUser?.isAdmin === false && location.pathname !== "/login" && location.pathname !== "/signup") && <IconButton color="inherit" aria-label="open drawer" onClick={handleDrawerOpen} edge="start" sx={{ marginRight: 5, }}><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 16 16" fill="none" className="css-1170n61"><rect x="1" y="5" width="14" height="1.5" rx="1" fill="#007FFF"></rect><rect x="1" y="9" width="14" height="1.5" rx="1" fill="#007FFF"></rect></svg></IconButton>}
-                        <Typography sx={{ flexGrow: 1 }} variant="h6" noWrap component="div">NOVA STORE</Typography>
+                        <Typography textAlign={'center'} sx={{ flexGrow: 1, marginLeft: '5%' }} variant="h6" noWrap component="div">NOVA STORE</Typography>
+                        {(user?.success && user?.loggedInUser?.isAdmin === false) && <Link to='/cart'><div style={{ color: 'black', cursor: 'pointer', textDecoration: 'none' }} className='ms-5' ><Badge badgeContent={cart?.products?.length} color="info">
+                            <CartIcon fontSize='large' /></Badge></div></Link>}
                         <div className="dropdown smooth-drop text-primary" style={{ cursor: "pointer", justifySelf: 'flex-end' }}>
-                            <div className="dropdown-toggle ms-5" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
+                            <div className="dropdown-toggle ms-2" id="triggerId" data-bs-toggle="dropdown" aria-haspopup="true"
                                 aria-expanded="false">
                                 <AccountCircleIcon fontSize='large' />
                             </div>
@@ -82,7 +91,9 @@ export default function SideBar({ getUser }) {
                     </div>
                 </Drawer >
                     : null}
-            </Box > : null}
+
+            </Box > : null
+        }
         </>
     );
 }
