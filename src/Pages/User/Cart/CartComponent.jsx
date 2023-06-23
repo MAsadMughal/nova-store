@@ -7,7 +7,7 @@ import axios from 'axios';
 
 const CartComponent = ({ product, colors, change, }) => {
     const [qty, setqty] = useState(product?.quantity)
-    const [currColor, setCurrColor] = useState(product?.color._id)
+    const [currColor, setCurrColor] = useState(product?.color?._id)
     const id = product.product._id;
     const { addToCart, getCart, setLoading } = useContext(ProductContext);
     const cartAddition = async (e) => {
