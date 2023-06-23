@@ -49,6 +49,7 @@ const OrderDetails = () => {
                                                     </Link>
                                                     <div className="card-body">
                                                         <h5 className="card-title">{item.product?.name}</h5>
+                                                        <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: item?.color?.name, color: 'white', marginBottom: "20px", cursor: 'pointer', height: '25px', textAlign: 'center', width: '60px', marginTop: '10px', borderRadius: '5px' }}></div>
                                                         <p className="card-text">${item.product?.price}</p>
                                                         <p className="card-text">Qty: {item.quantity}</p>
                                                     </div>

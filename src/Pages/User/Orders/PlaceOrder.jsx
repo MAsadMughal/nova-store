@@ -18,7 +18,7 @@ const PlaceOrder = () => {
         if (cart?.products?.length <= 0 || cart?.products?.length === undefined) {
             Navigate('/cart');
         }
-    }, [cart.products])
+    }, [cart?.products])
 
     const place = async (e) => {
         e.preventDefault();
@@ -46,14 +46,14 @@ const PlaceOrder = () => {
             </div>
             <div className="container">
                 <div className="row">
-                    <div className="col-md-8">
-
+                    <div className="">
                         <form>
                             <br /><h2 className='text-center'>Order Summary</h2>
-                            <table className="table">
+                            <table className="table w-100">
                                 <thead>
                                     <tr>
                                         <th scope="col">Product</th>
+                                        {window.innerWidth >= 400 ? <th scope="col">Color</th> : null}
                                         <th scope="col">Price</th>
                                         <th scope="col">Qty</th>
                                         <th scope="col">Total</th>
@@ -62,9 +62,15 @@ const PlaceOrder = () => {
                                 <tbody>
                                     {cart && cart?.products?.map((item, key) => {
                                         return (<tr key={key}>
-                                            <td>
+                                            {window.innerWidth >= 400 ? <>
+                                                <td>
+                                                    <img src={item?.product?.images[0].url} width="60px" alt="Product 1" />
+                                                </td>
+                                                <td><div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: item?.color?.name, color: 'white', marginBottom: "20px", cursor: 'pointer', height: '25px', textAlign: 'center', width: '60px', marginTop: '10px', borderRadius: '5px' }}></div></td>
+                                            </> : <td>
                                                 <img src={item?.product?.images[0].url} width="60px" alt="Product 1" />
-                                            </td>
+                                                <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: item?.color?.name, color: 'white', marginBottom: "20px", marginTop: '10px', cursor: 'pointer', height: '15px', textAlign: 'center', width: '60px', borderRadius: '5px' }}></div></td>
+                                            }
                                             <td>${item?.product?.price}</td>
                                             <td>{item?.quantity}</td>
                                             <td>${item?.product?.price * item?.quantity}</td>
@@ -73,15 +79,15 @@ const PlaceOrder = () => {
                                     })
                                     }
                                     <tr>
-                                        <td colSpan="3">Shipping</td>
+                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Shipping</td>
                                         <td>$10.00</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan="3">Tax</td>
+                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Tax</td>
                                         <td>${(parseFloat(cartTotal * 0.1)).toFixed(2)}</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan="3">Total</td>
+                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Total</td>
                                         <td>${(parseFloat((cartTotal + 10) + (cartTotal * 0.1))).toFixed(2)}</td>
                                     </tr>
                                 </tbody>
@@ -109,13 +115,13 @@ const PlaceOrder = () => {
                             </div>
                             <br /><button onClick={place} type="submit" className="btn btn-primary btn-block">Place Order</button>
                         </form>
-                            <br />
+                        <br />
 
                     </div>
 
                 </div>
             </div>
-        </div>}
+        </div >}
     </>
     )
 }
