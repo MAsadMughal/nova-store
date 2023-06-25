@@ -2,7 +2,6 @@ import { motion } from "framer-motion";
 import React, { useContext, useEffect, useRef, useState } from 'react';
 import ReactStars from "react-rating-stars-component";
 
-import { Carousel } from "react-responsive-carousel";
 import "react-responsive-carousel/lib/styles/carousel.min.css"; // requires a loader
 import { Link, useNavigate, useParams, } from "react-router-dom";
 import "./ProductDetails.css";

@@ -23,11 +23,11 @@ const PlaceOrder = () => {
     const place = async (e) => {
         e.preventDefault();
         try {
-            const data = cart.products.map((i) => {
-                const { quantity } = i;
-                const { name, _id, price, images } = i.product;
-                return { quantity, name, _id, price, image: images[0].url };
-            })
+            // const data = cart.products.map((i) => {
+            //     const { quantity } = i;
+            //     const { name, _id, price, images } = i.product;
+            //     return { quantity, name, _id, price, image: images[0].url };
+            // })
             setLoading(true)
             // await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/placeorder`, { total: cartTotal });
             await axios
