@@ -139,11 +139,11 @@ const EditProduct = () => {
         getProductDetails();
     }, [])
 
-useEffect(() => {
-  setProduct({
-    ...product,colors
-  })
-}, [colors])
+    useEffect(() => {
+        setProduct({
+            ...product, colors
+        })
+    }, [colors])
 
 
     const handleChange = (e) => {
