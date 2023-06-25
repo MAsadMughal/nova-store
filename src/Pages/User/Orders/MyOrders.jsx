@@ -56,11 +56,11 @@ const MyOrders = () => {
                         </div>
                     </div>
                 </main>
-                    <footer className="bg-light py-3 w-100 mt-5 bottom-0">
+                    {/* <footer className="bg-light py-3 w-100 mt-5 bottom-0">
                         <div className="container text-center">
                             <p>&copy; 2023 Ecommerce Website. All rights reserved.</p>
                         </div>
-                    </footer>
+                    </footer> */}
                 </>
             }
         </div >

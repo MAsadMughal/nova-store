@@ -23,17 +23,33 @@ const PlaceOrder = () => {
     const place = async (e) => {
         e.preventDefault();
         try {
+            const data = cart.products.map((i) => {
+                const { quantity } = i;
+                const { name, _id, price, images } = i.product;
+                return { quantity, name, _id, price, image: images[0].url };
+            })
             setLoading(true)
-            await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/placeorder`, { total: cartTotal });
+            // await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/placeorder`, { total: cartTotal });
+            await axios
+                .post(`${process.env.REACT_APP_API_URL}/api/v1/create-checkout-session`, {
+                    cart,
+                })
+                .then((response) => {
+                    if (response?.data?.url) {
+                        window.location.href = response.data.url;
+                    }
+                })
+                .catch((err) => console.log(err.message));
+
             setLoading(false)
             Notification('Success', 'Successfully Placed Your Order', 'success');
-            setTimeout(() => {
-                Navigate('/cart');
-            }, 2000);
+            // setTimeout(() => {
+            //     Navigate('/cart');
+            // }, 2000);
         } catch (error) {
             setLoading(false)
             Notification('Error', error?.response?.data?.message, 'danger');
-            Navigate('/cart');
+            // Navigate('/cart');
         }
     }
 
@@ -71,24 +87,24 @@ const PlaceOrder = () => {
                                                 <img src={item?.product?.images[0].url} width="60px" alt="Product 1" />
                                                 <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: item?.color?.name, color: 'white', marginBottom: "20px", marginTop: '10px', cursor: 'pointer', height: '15px', textAlign: 'center', width: '60px', borderRadius: '5px' }}></div></td>
                                             }
-                                            <td>${item?.product?.price}</td>
+                                            <td>{item?.product?.price} Rs.</td>
                                             <td>{item?.quantity}</td>
-                                            <td>${item?.product?.price * item?.quantity}</td>
+                                            <td>{item?.product?.price * item?.quantity} Rs.</td>
                                         </tr>
                                         )
                                     })
                                     }
                                     <tr>
-                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Shipping</td>
-                                        <td>$10.00</td>
+                                        <td colSpan={window.innerWidth >= 400 ? '4' : '3'}>Shipping</td>
+                                        <td>10.00 Rs.</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Tax</td>
-                                        <td>${(parseFloat(cartTotal * 0.1)).toFixed(2)}</td>
+                                        <td colSpan={window.innerWidth >= 400 ? '4' : '3'}>Tax</td>
+                                        <td>{(parseFloat(cartTotal * 0.1)).toFixed(2)} Rs.</td>
                                     </tr>
                                     <tr>
-                                        <td colSpan={window.innerWidth >= 400?'4':'3'}>Total</td>
-                                        <td>${(parseFloat((cartTotal + 10) + (cartTotal * 0.1))).toFixed(2)}</td>
+                                        <td colSpan={window.innerWidth >= 400 ? '4' : '3'}>Total</td>
+                                        <td>{(parseFloat((cartTotal + 10) + (cartTotal * 0.1))).toFixed(2)} Rs.</td>
                                     </tr>
                                 </tbody>
                             </table>

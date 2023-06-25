@@ -79,7 +79,7 @@ const CartComponent = ({ product, colors, change, }) => {
                     }
                 </select>
             </td>
-            <td>${product?.product?.price * qty}</td>
+            <td>{product?.product?.price * qty} Rs.</td>
             {window.innerWidth >= 400 ? <> <td>
                 <button onClick={disable ? () => { setDisable(false); change(id, true) } : EditFun} className="btn btn-sm btn-info text-light">{disable ? (window.innerWidth >= 600 ? `Edit` : <EditIcon />) : window.innerWidth >= 600 ? `Submit` : <SubmitIcon />}</button>
             </td>

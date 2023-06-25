@@ -50,7 +50,7 @@ const OrderDetails = () => {
                                                     <div className="card-body">
                                                         <h5 className="card-title">{item.product?.name}</h5>
                                                         <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: item?.color?.name, color: 'white', marginBottom: "20px", cursor: 'pointer', height: '25px', textAlign: 'center', width: '60px', marginTop: '10px', borderRadius: '5px' }}></div>
-                                                        <p className="card-text">${item.product?.price}</p>
+                                                        <p className="card-text">{item.product?.price} Rs.</p>
                                                         <p className="card-text">Qty: {item.quantity}</p>
                                                     </div>
                                                 </div>
@@ -78,19 +78,19 @@ const OrderDetails = () => {
                                     <tbody>
                                         <tr>
                                             <td>Subtotal</td>
-                                            <td>${order?.total}</td>
+                                            <td>{order?.total} Rs.</td>
                                         </tr>
                                         <tr>
                                             <td>Shipping</td>
-                                            <td>$10.00</td>
+                                            <td>10.00 Rs.</td>
                                         </tr>
                                         <tr>
                                             <td>Tax</td>
-                                            <td>${(parseFloat(order?.total * 0.1)).toFixed(2)}</td>
+                                            <td>{(parseFloat(order?.total * 0.1)).toFixed(2)} Rs.</td>
                                         </tr>
                                         <tr>
                                             <td>Total</td>
-                                            <td>${(parseFloat((order?.total + 10) + (order?.total * 0.1))).toFixed(2)}</td>
+                                            <td>{(parseFloat((order?.total + 10) + (order?.total * 0.1))).toFixed(2)} Rs.</td>
                                         </tr>
                                     </tbody>
                                 </table>

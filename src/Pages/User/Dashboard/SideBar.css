@@ -12,12 +12,12 @@ ul {
   margin-top: 10px;
   border-radius: 5px;
   text-decoration: none;
-  color: black;
-  background-color: aquamarine;
+  color: white;
+  background-color: blue;
 }
 .AdminSideBarLink:hover {
   color: white;
-  background-color: deepskyblue;
+  background-color: black;
   box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.23) 0px 3px 6px;
 }
 .dropdown-toggle::after {

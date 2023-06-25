@@ -11,3 +11,4 @@ export { default as playstore } from "../assets/play-store.png";
 export { default as appstore } from "../assets/app-store.png"
 export { default as logowhite} from "../assets/logo-white.png" 
 export { default as exclusive} from "../assets/exclusive.png" 
+export { default as voiceCommerce} from "../assets/voicecommerce.png" 

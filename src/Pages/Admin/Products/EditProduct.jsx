@@ -34,7 +34,6 @@ const EditProduct = () => {
         stock: '',
         proFor: '',
         colors: [],
-        weight: '',
         brand: '',
         p1: photo1, p2: photo2, p3: photo3,
         description: ''
@@ -79,20 +78,24 @@ const EditProduct = () => {
 
     const [categories, setCategories] = useState([])
     const [brands, setBrands] = useState([])
-    const [allColors, setColors] = useState([])
-    const [colors, setSelectedColors] = useState(product?.colors)
+    const [allColors, setAllColors] = useState([])
+    const [colors, setSelectedColors] = useState(product?.colors && product?.colors)
     const addColor = (c) => {
         if (!colors.some((item) => item?._id === c?._id)) {
             setSelectedColors([...colors, c])
-
         }
     }
 
-    useEffect(() => {
-        setProduct({
-            ...product, colors
-        })
-    }, [colors])
+
+    // useEffect(() => {
+    //     // setProduct({
+    //     //     ...product, colors
+    //     // })
+    //     // allColors.forEach((i) => { console.log(product?.colors?.includes(i)) });
+
+    //     setSelectedColors(product?.colors);
+    // }, [allColors, product?.colors])
+
 
     const removeColor = (c) => {
         const updatedItems = colors.filter((item) => item?._id !== c?._id);
@@ -102,36 +105,45 @@ const EditProduct = () => {
     useEffect(() => {
         getCategories();
     }, [])
+
+    console.log(colors);
     const getCategories = async () => {
         const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/categories`)
         const b = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/brands`)
         const c = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/colors`)
         setCategories(data);
         setBrands(b?.data);
-        setColors(c?.data);
+        setAllColors(c?.data);
     }
- 
 
 
 
 
-
-
-    const { name, category, proFor, price, stock, weight, brand, description, p1, p2, p3 } = product;
+    const { name, category, proFor, price, stock, brand, description, p1, p2, p3 } = product;
 
     const { id } = useParams()
     const getProductDetails = async () => {
-        setLoading(true)
-        const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
-        setLoading(false)
-        setProduct(data);
-        setSelectedColors(allColors?.filter((i) => data?.colors?.includes(i?._id)));
+        try {
+            setLoading(true)
+            const { data } = await axios.get(`${process.env.REACT_APP_API_URL}/api/v1/product/${id}`)
+            setProduct(data);
+            setSelectedColors(data?.colors);
+            setLoading(false)
+        } catch (error) {
+            setLoading(false)
+        }
     }
+
 
     useEffect(() => {
         getProductDetails();
-    }, [allColors])
+    }, [])
 
+useEffect(() => {
+  setProduct({
+    ...product,colors
+  })
+}, [colors])
 
 
     const handleChange = (e) => {
@@ -172,7 +184,6 @@ const EditProduct = () => {
                     stock: '',
                     proFor: '',
                     colors: [],
-                    weight: '',
                     brand: '',
                     p1: photo1, p2: photo2, p3: photo3,
                     description: ''
@@ -256,8 +267,6 @@ const EditProduct = () => {
                         <input className='signupInput' type="number" min={10} onChange={handleChange} value={price} name="price" placeholder="Price" />
                         <label>Stock</label>
                         <input className='signupInput' type="number" min={10} onChange={handleChange} value={stock} name="stock" placeholder="Stock" />
-                        <label>Weight</label>
-                        <input className='signupInput' type="number" min={10} onChange={handleChange} value={weight} name="weight" placeholder="Grams" />
 
 
                         <label>Product Images (Change All or None)</label>

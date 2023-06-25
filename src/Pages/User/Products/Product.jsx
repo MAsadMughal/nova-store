@@ -16,16 +16,16 @@ const Product = ({ product, cartAddition }) => {
                         <img height='250vh' width="100%" className='card-img-top' style={{ objectFit: 'cover', padding: "5px" }} src={product?.images[0]?.url} alt="Product " />
                     </Link>
                     <div className="card-body">
-                        <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: 'black', color: 'white', marginBottom: "20px", cursor: 'pointer', height: '25px', textAlign: 'center', width: '100px', borderRadius: '5px' }}><b>{product?.proFor}</b></div>
+                        {/* <div style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', background: 'black', color: 'white', marginBottom: "20px", cursor: 'pointer', height: '25px', textAlign: 'center', width: '100px', borderRadius: '5px' }}><b>{product?.proFor}</b></div> */}
                         <h5 className="card-title">{product?.name}</h5>
                         <div className='Selected' style={{ display: 'flex', flexDirection: 'row', alignItems: 'center', flexWrap: 'wrap', }}>
                             {product?.colors?.map((i, ind) => {
                                 return (
                                     <div key={ind} onClick={(e) => setSelectedColor(i._id)} style={{ boxShadow: '0 0 5px rgba(0, 0, 0, 0.5)', marginLeft: ind !== 0 && '5px', cursor: 'pointer', height: selectedColor === i._id ? '25px' : '20px', width: selectedColor === i._id?'50px':'40px', borderRadius: '5px', background: i?.name, }} value={i?._id}></div>)
                             })}</div>
-                        <p className="card-text" style={{ marginTop: '10px' }}><CategoryIcon /> {product?.category?.name}</p>
+                        {/* <p className="card-text" style={{ marginTop: '10px' }}><CategoryIcon /> {product?.category?.name}</p> */}
                         <ReactStars isHalf={true} edit={false} size={20} count={5} value={product?.ratings}></ReactStars>
-                        <p className="card-price">${product?.price}</p>
+                        <p className="card-price">{product?.price} Rs.</p>
                         <button className="btn btn-primary" onClick={() => (user?.success && user?.loggedInUser?.isAdmin === false) ? cartAddition(product?._id, 1, selectedColor) : Navigate('/login')}>Add to Cart</button>
                     </div>
                 </div>

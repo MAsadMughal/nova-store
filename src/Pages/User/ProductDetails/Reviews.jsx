@@ -8,7 +8,7 @@ import { about01 } from '../../../assets';
 const Reviews = ({ product }) => {
     return (
         <div>
-            <h2 id='ReviewHeading' className='HomeHeading'>REVIEWS</h2>
+            <h2 id='ReviewHeading' className='HomeHeading mt-3'>REVIEWS</h2>
             <br />
             <center>
                 <hr style={{ width: "10%", height: "5px", background: "black" }} />

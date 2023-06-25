@@ -3,10 +3,9 @@ import "./Login.scss";
 import axios from 'axios';
 import Notification from '../../../Components/utils/Notifications/Notifications';
 import { ReactNotifications } from 'react-notifications-component';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import UserContext from '../../../context/User/UserContext';
 import Loader from '../../../Components/utils/Loader/Loader';
-
 const Login = ({ getUser }) => {
   const { getUserDetails } = useContext(UserContext);
   let [loading, setLoading] = useState(false)
@@ -60,11 +59,10 @@ const Login = ({ getUser }) => {
       {loading ? <Loader /> :
         <form id='form'>
           <h3>Login Here</h3>
-          <label >Username</label>
-          <input className='loginInput' type="text" onChange={handleChange} required value={email} name="email" placeholder="Enter Email" />
-          <label >Password</label>
-          <input className='loginInput' type='password' onChange={handleChange} required value={password} name="password" placeholder="Enter Password" />
+          <input className='loginInput' style={{ marginTop: '60px' }} type="text" onChange={handleChange} required value={email} name="email" placeholder="Enter Email" />
+          <input className='loginInput ' type='password' onChange={handleChange} required value={password} name="password" placeholder="Enter Password" />
           <button className='loginSubmit' onClick={login}>Log In</button>
+          <label className=''> Don't have an account? <Link to='/signup'>Sign up</Link> Now.</label>
         </form>}
 
     </div>

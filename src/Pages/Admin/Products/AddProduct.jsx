@@ -46,7 +46,6 @@ const AddProducts = () => {
         stock: '',
         proFor: '',
         colors: [],
-        weight: '',
         brand: '',
         p1: photo1, p2: photo2, p3: photo3,
         description: ''
@@ -73,7 +72,7 @@ const AddProducts = () => {
 
 
     const Navigate = useNavigate();
-    const { name, category, proFor, price, stock, weight, brand, description, p1, p2, p3 } = product;
+    const { name, category, proFor, price, stock,  brand, description, p1, p2, p3 } = product;
 
     //Reading Images
     useEffect(() => {
@@ -127,14 +126,12 @@ const AddProducts = () => {
             try {
                 setLoading(true)
                 setProduct({ ...product, colors: colors })
-                console.log(product)
                 await axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addproduct`, product);
                 setProduct({
                     name: '',
                     category: '',
                     price: '',
                     stock: '',
-                    weight: '',
                     colors: '',
                     brand: '',
                     proFor: '',
@@ -217,8 +214,6 @@ const AddProducts = () => {
                     <input className='signupInput' type="number" min={10} onChange={handleChange} value={price} name="price" placeholder="Price" />
                     <label>Stock</label>
                     <input className='signupInput' type="number" min={10} onChange={handleChange} value={stock} name="stock" placeholder="Stock" />
-                    <label>Weight</label>
-                    <input className='signupInput' type="number" min={10} onChange={handleChange} value={weight} name="weight" placeholder="Weight in Grams" />
 
 
                     <label>Product Images</label>

@@ -4,7 +4,7 @@ import axios from 'axios';
 import { ReactNotifications } from 'react-notifications-component'
 import Notification from '../../../Components/utils/Notifications/Notifications'
 import UserContext from '../../../context/User/UserContext';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import Loader from '../../../Components/utils/Loader/Loader';
 
 
@@ -85,6 +85,8 @@ const Signup = ({ getUser }) => {
                     <label>Confirm Password</label>
                     <input className='signupInput' type="password" name="repassword" value={repassword} onChange={handleChange} placeholder="Repeat Password" required />
                     <button className='loginSubmit' type="submit" onClick={signup}>Sign up</button>
+                    <label className=''> Already have an account? <Link to='/login'>Login</Link> Now.</label>
+
                 </form>}
         </div>
     )

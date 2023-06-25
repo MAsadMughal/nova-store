@@ -21,6 +21,8 @@
   padding: 5px;
   border-radius: 50px;
   cursor: pointer;
+  background: white;
+
 }
 .mic-container:hover {
   background: white;
@@ -50,7 +52,6 @@
 @media screen and (max-width: 600px) {
   .mic-container {
     margin-left: 46%;
-    background: white;
   }
 }
 @media screen and (max-width: 420px) {
@@ -91,6 +92,7 @@
   animation: pulse 0.3s infinite;
 }
 .recording {
+  background: white;
   animation: pulse 0.3s infinite;
 }
 @keyframes pulse {

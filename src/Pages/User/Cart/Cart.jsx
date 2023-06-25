@@ -49,7 +49,6 @@ const Cart = () => {
             } else { setParentDisabled(false) }
         }
     }, [change])
-    console.log(arr)
 
 
 
@@ -99,7 +98,7 @@ const Cart = () => {
 
                             {!parentDisable ? <div className="total d-flex justify-content-between align-items-center">
                                 <h2>Total:</h2>
-                                <p className="$total">${cartTotal}</p>
+                                <p className="$total">{cartTotal} Rs.</p>
                             </div> : <h2>Selecting Products...</h2>
                             }
                             <div className="text-end">

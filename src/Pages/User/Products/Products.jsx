@@ -117,7 +117,6 @@ const Products = () => {
 
 
     const setFilters = (sentence) => {
-        console.log(sentence)
         sentence.forEach((word) => {
             const lowercaseWord = word.toLowerCase();
 
@@ -196,7 +195,7 @@ const Products = () => {
                 <button className='btn btn-info ms-sm-0 ms-md-2 btn-sm text-light mt-2 w-50' onClick={clearFilters}>Clear</button>
             </div>
             {loading ? <Loader /> :
-                <div className='d-flex flex-wrap align-items-center justify-content-evenly'>
+                <div className='d-flex flex-wrap align-items-center'>
                     {products && products?.map((item, ind) => {
                         return (item?.stock >= 1 && <Product cartAddition={cartAddition} key={ind} product={item} />)
                     })}

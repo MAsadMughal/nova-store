@@ -66,8 +66,8 @@
   }
 }
 #form {
-  margin-top: 10px;
-  height: 520px;
+  margin-top: 50px;
+  min-height: 520px;
   width: 400px;
   border-radius: 10px;
   backdrop-filter: blur(10px);
@@ -80,7 +80,7 @@
   @media screen and (max-width: 550px) {
     min-height: 450px;
     width: 325px;
-    max-height: 470px;
+    max-height: 510px;
   }
   @media screen and (max-width: 350px) {
     min-height: 400px;
@@ -112,7 +112,7 @@ label {
   background-color: rgba(255, 255, 255, 0.07);
   border-radius: 3px;
   padding: 0 10px;
-  margin-top: 8px;
+  margin-top: 40px;
   border: 1px solid black;
   font-size: 14px;
   font-weight: 300;
@@ -154,7 +154,7 @@ label {
   margin-right: 4px;
 }
 #Signupform {
-  margin-top: 10px;
+  margin-top: 50px;
   min-height: 520px;
   width: 400px;
   border-radius: 10px;

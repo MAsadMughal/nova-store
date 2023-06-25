@@ -17,6 +17,7 @@ import MicNone from '@mui/icons-material/MicNone'
 import MicOff from '@mui/icons-material/MicOff'
 import UserContext from '../../../context/User/UserContext';
 import { Link } from 'react-router-dom';
+import { Typography } from '@mui/material';
 
 const Home = () => {
   const { user } = useContext(UserContext);
@@ -173,9 +174,9 @@ const Home = () => {
     {/* <Navbar /> */}
     <ReactNotifications />
     <HomeCarousel />
-    <Features />
+    {/* <Features /> */}
     <Socials />
-    <div className="row1">
+    {/* <div className="row1">
       <div className="col1">
         <img src={exclusive} alt="exclusive" />
       </div>
@@ -188,7 +189,7 @@ const Home = () => {
           </button>
         </Link>
       </div>
-    </div>
+    </div> */}
     <div className="logos">
       <motion.div>
         <img src={logogodrej} alt="home" />
@@ -207,11 +208,8 @@ const Home = () => {
       </motion.div>
     </div>
 
-
-
-
-
     <div ref={scrollRef}></div>
+
     {curr && <h1 className="gradient-text">{curr}</h1>}
     <div className={`mic-container ${listening && 'recording'} border-black`} onClick={handleClick}>{listening ? <MicOff fontSize='large' className='mic-icon' /> : <MicNone fontSize='large' className='mic-icon' />}</div>
 
@@ -244,7 +242,7 @@ const Home = () => {
       <button className='btn btn-info ms-sm-0 ms-md-2 btn-sm text-light mt-2 w-50' onClick={clearFilters}>Clear</button>
     </div>
     {loading ? <Loader /> :
-      <div className='d-flex flex-wrap align-items-center justify-content-evenly'>
+      <div className='d-flex flex-wrap align-items-center'>
         {products && products?.map((item, ind) => {
           return (item?.stock >= 1 && <Product cartAddition={cartAddition} key={ind} product={item} />)
         })}
@@ -255,45 +253,6 @@ const Home = () => {
 
 
 
-    <div className="foot">
-      <div className="footer">
-        <div className="c2">
-          <img className='logowhite' src={logowhite} alt="home" />
-        </div>
-        <div className="c1">
-          <h2 id="fh2">Download our app</h2>
-          <p id="fp2"> You can download our android and ios app.</p>
-          <img className='c1img' src={playstore} alt="home" />
-          <img className='c1img' src={appstore} alt="home" />
-
-        </div>
-
-        <div className="c3">
-          <h2 id="fh2">Useful Links</h2>
-          <ul id="ul">
-            <li className="lis" id="l1">Coupons</li>
-            <li className="lis" id="l2">Return Policy</li>
-            <li className="lis" id="l3">Blog Posts</li>
-            <li className="lis" id="l4">join Affiliate</li>
-          </ul>
-        </div>
-
-        <div className="c4">
-          <h2 id="fh2">Follow Us</h2>
-          <ul id="ul">
-            <li className="lis" id="l1">Facebook</li>
-            <li className="lis" id="l2">Instagram</li>
-            <li className="lis" id="l3">Twitter</li>
-            <li className="lis" id="l4">Youtube </li>
-          </ul>
-
-        </div>
-      </div>
-      <div className="ft">
-        <hr id="lin" />
-        <p id="f2">Copyright &#169; 2023 - ASAD ULLAH</p>
-      </div>
-    </div>
   </>
   )
 }

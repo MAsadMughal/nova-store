@@ -3,6 +3,8 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import 'bootstrap/js/dist/dropdown';
 import { useContext, useEffect, useState } from 'react';
 import { BrowserRouter, Navigate, Route, Routes, } from 'react-router-dom';
+import { playstore, appstore, logowhite, voiceCommerce } from "./assets";
+
 import './App.scss';
 import AdminLogin from './Pages/Admin/Auth/Login';
 import AdminProfile from './Pages/Admin/Auth/Profile';
@@ -20,7 +22,6 @@ import Login from './Pages/User/Auth/Login';
 import Signup from './Pages/User/Auth/Signup';
 import UpdateProfile from './Pages/User/Auth/UpdateProfile';
 import Cart from './Pages/User/Cart/Cart';
-import AllCategories from './Pages/User/Category/AllCategories';
 import SideBar from './Pages/User/Dashboard/SideBar';
 import Home from './Pages/User/Home/Home';
 import MyOrders from './Pages/User/Orders/MyOrders';
@@ -80,7 +81,6 @@ function App() {
                 <Route path='/login' element={nouser ? <Login getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
                 <Route path='/signup' element={nouser ? <Signup getUser={getUser} /> : admin ? <Navigate to="/admin/dashboard" /> : <Navigate to='/' />} />
                 <Route path='/profile' element={normaluser && <UpdateProfile />} />
-                <Route path='/categories' element={normaluser && <AllCategories />} />
                 <Route path='/products' element={normaluser && <Products />} />
                 <Route path='/product/:id' element={<ProductDetails />} />
                 <Route path='/writeReview/:id' element={normaluser && <WriteReview />} />
@@ -108,8 +108,47 @@ function App() {
                 <Route path='/admin/editColor/:id' element={admin && <EditColor />} />
                 <Route path='/admin/orders' element={admin && <ShowOrders />} />
                 <Route path='/admin/orderDetail/:id' element={admin && <OrderDetail />} />
-                <Route path='*' element={<Navigate to='/' />} />
+                <Route path='*' element={<NotFound />} />
               </Routes>
+              <div className="foot">
+                <div className="footer">
+                  <div className="c2">
+                    <img className='logowhite' src={voiceCommerce} alt="home" />
+                  </div>
+                  <div className="c1">
+                    <h2 id="fh2">Download our app</h2>
+                    <p id="fp2"> You can download our android and ios app.</p>
+                    <img className='c1img' src={playstore} alt="home" />
+                    <img className='c1img' src={appstore} alt="home" />
+
+                  </div>
+
+                  <div className="c3">
+                    <h2 id="fh2">Useful Links</h2>
+                    <ul id="ul">
+                      <li className="lis" id="l1">About us</li>
+                      <li className="lis" id="l2">Privacy policy</li>
+                      <li className="lis" id="l3">Terms & conditions</li>
+                      {/* <li className="lis" id="l4"></li> */}
+                    </ul>
+                  </div>
+
+                  <div className="c4">
+                    <h2 id="fh2">Follow Us</h2>
+                    <ul id="ul">
+                      <li className="lis" id="l1">Facebook</li>
+                      <li className="lis" id="l2">Instagram</li>
+                      <li className="lis" id="l3">Twitter</li>
+                      <li className="lis" id="l4">Youtube </li>
+                    </ul>
+
+                  </div>
+                </div>
+                <div className="ft">
+                  <hr id="lin" />
+                  <p id="f2">Copyright &#169; 2023 - Voice Commerce</p>
+                </div>
+              </div>
             </ProductState>
           </User>
         </BrowserRouter>}

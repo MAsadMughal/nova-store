@@ -46,7 +46,8 @@ nav {
   display: flex;
   align-items: center;
   flex-wrap: wrap;
-  margin-bottom: 50px;
+  margin-bottom: 10vh;
+  margin-top: 10vh;
   justify-content: center;
   background: radial-gradient(#fff, #ffd6d6);
 }
@@ -104,7 +105,7 @@ nav {
 }
 
 .header {
-  background: radial-gradient(#fff, #ffd6d6);
+  background: radial-gradient(#fff, #0d6efd29);
 }
 
 #cart {
@@ -257,6 +258,7 @@ nav {
 }
 
 .foot {
+  margin-top: 50px;
   background: black;
   color: white;
   align-items: center;
@@ -268,7 +270,10 @@ nav {
 .c4 {
   margin-top: 40px;
 }
-
+.c2 img {
+  background-color: white;
+  height: 80px;
+}
 .ft {
   padding-bottom: 50px;
 }
@@ -382,8 +387,8 @@ nav {
   }
 
   #but {
-    width: 100px;
-    height: 30px;
+    min-width: 100px;
+    min-height: 30px;
     font-size: 20px;
   }
 
@@ -451,7 +456,7 @@ nav {
   margin-left: 23px;
   position: fixed;
   font-size: large;
-  bottom:81%;
+  bottom: 81%;
   z-index: 1;
   background: #55dff9;
   background: linear-gradient(135deg, #55dff9, #9480d8);

@@ -10,7 +10,6 @@ const ProductState = (props) => {
 
   const addToCart = (productId, quantity = 1, color) => {
     setLoading(true)
-    console.log(color)
     if (quantity >= 1) {
       const data = { productId, quantity, color };
       axios.post(`${process.env.REACT_APP_API_URL}/api/v1/addtocart`, data)

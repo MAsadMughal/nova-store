@@ -1,19 +1,20 @@
-#carousel-main {
-    width: 100%;
-    min-height: 60vh;
-    max-height: 70vh;
-    @media screen and (max-width: 500px) {
-        min-height: 40vh;
-        max-height: 50vh;
-    }
-    @media screen and (max-width: 800px) {
-        min-height: 30vh;
-        max-height: 40vh;
-    }
-}
+// #carousel-main {
+//     width: 100%;
+//     min-height: 60vh;
+//     max-height: 70vh;
+//     @media screen and (max-width: 500px) {
+//         min-height: 40vh;
+//         max-height: 50vh;
+//     }
+//     @media screen and (max-width: 800px) {
+//         min-height: 30vh;
+//         max-height: 40vh;
+//     }
+// }
 .carousel-item {
     transition-duration: 0.3s;
     width: 100%;
+    
     img {
         height: 60vh;
         width: 100%;
